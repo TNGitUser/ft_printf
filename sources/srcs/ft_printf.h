@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 10:02:23 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/13 18:27:59 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/13 21:01:50 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,14 @@ typedef struct		s_carg
 int					ft_printf(const char *str, ...);
 
 t_arg				*ft_readarg(char *str, va_list ap);
+
+void				ft_cchr(t_arg *la, va_list ap);
+void				ft_cptr(t_arg *la, va_list ap);
+void				ft_cint(t_arg *la, va_list ap);
+void				ft_cstr(t_arg *la, va_list ap);
+void				ft_coct(t_arg *la, va_list ap);
+
+char				*ft_coct_aux(long long n);
+char				*ft_chex(void *ptr);
 
 #endif

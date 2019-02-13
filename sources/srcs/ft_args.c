@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 14:29:15 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/13 17:58:30 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/13 21:12:57 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int		ft_iseflag(char *str, int i)
 
 int		ft_checknflag(int mod, int type)
 {
+	if (mod == 0)
+		return (1);
 	if (type == 3)
 	{
 		if (mod == 10 || mod == 20 || mod == 30 || mod == 60)
@@ -74,7 +76,25 @@ int		ft_checknflag(int mod, int type)
 	}
 	else if (type == 4)
 		return (mod == 10 || mod == 50);
-	return (mod == 0);
+	return (0);
+}
+
+void	ft_getcdata(int type, t_arg *la, va_list ap)
+{
+	if (type == 0)
+		ft_cchr(la, ap);
+	if (type == 1)
+		ft_cstr(la, ap);
+	if (type == 2)
+		ft_cptr(la, ap);
+	if (type == 3)
+		ft_cint(la, ap);
+//	if (type == 4)
+//		ft_cstr(la, ap);
+	if (type == 5)
+		ft_coct(la, ap);
+//	if (type == 6)
+//		ft_cstr(la, ap);
 }
 
 t_arg	*ft_readarg(char *str, va_list ap)
@@ -93,6 +113,8 @@ t_arg	*ft_readarg(char *str, va_list ap)
 	cv->next = NULL;
 	cv->str = str;
 	cv->type = type;
+	cv->data = NULL;
+	ft_getcdata(type, cv, ap);
 	if (!ft_checknflag(mod, type))
 	{
 		ft_memdel((void **)&str);

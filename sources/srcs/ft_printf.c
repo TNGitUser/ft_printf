@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 13:19:52 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/13 17:57:36 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/13 21:09:40 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int			ft_printf(const char *str, ...)
 	while (la != NULL)
 	{
 		printf("%s\n", la->str);
+		printf("\t-'%s'-\n", (char *)la->data);
 		la = la->next;
 	}
 	printf("%s", str);
