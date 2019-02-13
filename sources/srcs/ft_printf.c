@@ -6,20 +6,18 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 13:19:52 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/13 15:17:35 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/13 17:57:36 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_iscflag(char c)
+int			ft_iscflag(char c)
 {
 	char	*cflag;
-	char	*eflag;
 	int		i;
 
 	cflag = "cpsifdiouxX%";
-	eflag = "#+-. ";
 	i = 0;
 	while (cflag[i] != '\0')
 	{
@@ -53,50 +51,55 @@ int		ft_ccount(const char *str)
 	return (c);
 }
 
-t_carg	*ft_getclist(const char *str, va_list ap)
+t_arg		*ft_getclist(const char *str, va_list ap, t_arg *la)
 {
-	t_carg	*carg;
-	t_list	*head;
-	t_list	*cur;
+	t_arg	*head;
 	int		i;
-	int		k;;
+	int		k;
 
 	i = 0;
-	if (!(carg = malloc(sizeof(t_carg))))
-		exit(1);
-	carg->cn = ft_ccount(str);
-	printf("Number of argument : %i\n", carg->cn);
-	head = ft_lstnew(NULL, 0);
+	head = la;
+	printf("Number of argument : %i\n", ft_ccount(str));
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
 		{
 			k = i + 1;
-			while (!ft_iscflag(str[k])) 
+			while (!ft_iscflag(str[k]))
 				++k;
-			ft_readarg(ft_strsub(str, i, k - i + 1), ap);
+			if (la == NULL)
+			{
+				la = ft_readarg(ft_strsub(str, i, k - i + 1), ap);
+				head = la;
+			}
+			else
+			{
+				la->next = ft_readarg(ft_strsub(str, i, k - i + 1), ap);
+				la = la->next;
+			}
+			if (la == NULL)
+				exit(1);
 		}
 		++i;
 	}
-	cur = head->next;
-	while (cur != NULL)
-	{
-		printf("Arg : %s\n", (char *)cur->content);
-		cur = cur->next;
-	}
-	ft_lstfree_all(&head);
-	return (carg);
+	return (head);
 }
 
-int	ft_printf(const char *str, ...)
+int			ft_printf(const char *str, ...)
 {
 	va_list	ap;
-	t_carg	*carg;
+	t_arg	*la;
 
+	la = NULL;
 	va_start(ap, str);
-	carg = ft_getclist(str, ap);
+	la = ft_getclist(str, ap, la);
 	va_end(ap);
+	while (la != NULL)
+	{
+		printf("%s\n", la->str);
+		la = la->next;
+	}
 	printf("%s", str);
-	ft_memdel((void **)&carg);
+	ft_memdel((void **)&la);
 	return (0);
 }
