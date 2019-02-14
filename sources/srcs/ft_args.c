@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 14:29:15 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/13 21:12:57 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/14 06:45:38 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,14 @@ void	ft_getcdata(int type, t_arg *la, va_list ap)
 		ft_cptr(la, ap);
 	if (type == 3)
 		ft_cint(la, ap);
-//	if (type == 4)
-//		ft_cstr(la, ap);
+	if (type == 4)
+		ft_cflt(la, ap);
 	if (type == 5)
 		ft_coct(la, ap);
-//	if (type == 6)
-//		ft_cstr(la, ap);
+	if (type == 6)
+		ft_cund(la, ap);
+	if (type == 7 || type == 8)
+		ft_cunh(la, ap, type - 7);
 }
 
 t_arg	*ft_readarg(char *str, va_list ap)
@@ -104,7 +106,6 @@ t_arg	*ft_readarg(char *str, va_list ap)
 	int		mod;
 	size_t	len;
 
-	(void)ap;
 	if (!(cv = malloc(sizeof(t_arg))))
 		return (NULL);
 	len = ft_strlen(str);
@@ -115,6 +116,7 @@ t_arg	*ft_readarg(char *str, va_list ap)
 	cv->type = type;
 	cv->data = NULL;
 	ft_getcdata(type, cv, ap);
+	ft_init_ef(cv, mod);
 	if (!ft_checknflag(mod, type))
 	{
 		ft_memdel((void **)&str);

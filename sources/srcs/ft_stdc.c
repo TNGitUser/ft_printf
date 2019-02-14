@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 18:29:18 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/13 21:15:43 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/14 05:05:51 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_cptr(t_arg *la, va_list ap)
 	void	*ptr;
 
 	ptr = va_arg(ap, void *);
-	if (!(out = ft_chex(ptr)))
+	if (!(out = ft_chex(ptr, 0, 0)))
 		exit(1);
 	tmp = out;
 	out = ft_strjoin("0x", out);
@@ -44,15 +44,13 @@ void	ft_cptr(t_arg *la, va_list ap)
 
 void	ft_cint(t_arg *la, va_list ap)
 {
-	int *nu;
+	char	*out;
+	int		nu;
 
-	nu = NULL;
-	if (!(nu = malloc(sizeof(int))))
+	nu = va_arg(ap, int);
+	if (!(out = ft_itoa(nu)))
 		exit(1);
-	*nu = va_arg(ap, int);
-	if (!nu)
-		exit(1);
-	la->data = (void *)nu;
+	la->data = (void *)out;
 }
 
 void	ft_cstr(t_arg *la, va_list ap)

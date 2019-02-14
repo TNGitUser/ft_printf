@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:33:06 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/13 21:04:40 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/14 06:40:13 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static size_t		ft_hcount(long unsigned n, int base)
 	return (c);
 }
 
-char				*ft_chex(void *ptr)
+char				*ft_chex(void *ptr, long long n, int t)
 {
 	char			*out;
 	size_t			len;
 	long unsigned	lptr;
 	long unsigned	res;
 
-	lptr = (long unsigned)ptr;
+	lptr = t == 0 ? (long unsigned)ptr : n;
 	len = ft_hcount(lptr, 16);
 	if (!(out = malloc(sizeof(char) * (len + 1))))
 		return (NULL);
@@ -86,5 +86,4 @@ char				*ft_coct_aux(long long n)
 		--len;
 	}
 	return (out);
-
 }

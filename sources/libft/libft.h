@@ -6,7 +6,7 @@
 /*   By: lucmarti <lucmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 10:53:21 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/01/31 16:20:42 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/14 04:55:00 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct		s_matrix
 	t_vector2		*dim;
 }					t_matrix;
 
-int					ft_atoi(const char *str);
+long long			ft_atoi(const char *str);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);

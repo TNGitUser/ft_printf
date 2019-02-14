@@ -6,13 +6,13 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 13:19:52 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/13 21:09:40 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/14 06:38:09 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			ft_iscflag(char c)
+int		ft_iscflag(char c)
 {
 	char	*cflag;
 	int		i;
@@ -51,7 +51,7 @@ int		ft_ccount(const char *str)
 	return (c);
 }
 
-t_arg		*ft_getclist(const char *str, va_list ap, t_arg *la)
+t_arg	*ft_getclist(const char *str, va_list ap, t_arg *la)
 {
 	t_arg	*head;
 	int		i;
@@ -85,7 +85,7 @@ t_arg		*ft_getclist(const char *str, va_list ap, t_arg *la)
 	return (head);
 }
 
-int			ft_printf(const char *str, ...)
+int		ft_printf(const char *str, ...)
 {
 	va_list	ap;
 	t_arg	*la;

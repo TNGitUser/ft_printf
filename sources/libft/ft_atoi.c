@@ -6,11 +6,11 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 14:50:23 by lucmarti          #+#    #+#             */
-/*   Updated: 2018/11/21 10:50:52 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/14 04:54:41 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+long long ft_atoi(const char *str)
 {
 	int			sign;
 	int			nd;
@@ -34,5 +34,5 @@ int	ft_atoi(const char *str)
 		if ((ret > 9223372036854775807 || ret < 0) && nd >= 18)
 			return (sign == 0 ? -1 : 0);
 	}
-	return (sign ? 0 - (int)ret : (int)ret);
+	return (sign ? 0 - ret : ret);
 }
