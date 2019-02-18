@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 13:19:52 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/14 06:38:09 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/18 13:30:29 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,18 +89,22 @@ int		ft_printf(const char *str, ...)
 {
 	va_list	ap;
 	t_arg	*la;
+	t_arg	*l;
 
 	la = NULL;
 	va_start(ap, str);
 	la = ft_getclist(str, ap, la);
+	l = la;
 	va_end(ap);
 	while (la != NULL)
 	{
 		printf("%s\n", la->str);
-		printf("\t-'%s'-\n", (char *)la->data);
+		printf("\tData : -'%s'-\n", (char *)la->data);
+		ft_dis_ef(la);
 		la = la->next;
 	}
-	printf("%s", str);
+	printf("%s\n\n", str);
+	ft_format_str(str, l);
 	ft_memdel((void **)&la);
 	return (0);
 }

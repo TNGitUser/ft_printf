@@ -6,7 +6,7 @@
 #    By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/08 09:51:24 by lucmarti          #+#    #+#              #
-#    Updated: 2019/02/14 06:45:53 by lucmarti         ###   ########.fr        #
+#    Updated: 2019/02/18 13:27:09 by lucmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,11 @@ DEBTARGET = printf
 # Might be interesting to look for MAKEFILE patsubst (Text functions)
 
 SRC := ./srcs/main.c ./srcs/ft_printf.c ./srcs/ft_args.c ./srcs/ft_stdc.c	\
-	./srcs/ft_hex.c ./srcs/ft_stdc2.c ./srcs/ft_eflag.c
+	./srcs/ft_hex.c ./srcs/ft_stdc2.c ./srcs/ft_eflag.c ./srcs/ft_format.c
 OBJ = $(SRC:.c=.o)
 
 INCLUDES = ./includes/
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra #-Werror -g
 
 ifndef VERBOSE
 .SILENT:

@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 14:29:15 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/14 06:45:38 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/18 10:31:51 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,25 @@ int		ft_getctype(char *str, int i)
 	return (-1);
 }
 
+static void	ft_idontknow()
+{
+
+}
+
 int		ft_iseflag(char *str, int i)
 {
 	int		c;
+	char	m;
 
 	c = 0;
+	m = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == 'l' || str[i] == 'h' || str[i] == 'L')
 		{
+			if (m != 0 && m != str[i])
+				break ;//exit(1);
+			m = str[i];
 			if (str[i] == 'l')
 				c += 10;
 			else
@@ -76,7 +86,7 @@ int		ft_checknflag(int mod, int type)
 	}
 	else if (type == 4)
 		return (mod == 10 || mod == 50);
-	return (0);
+	return (1);
 }
 
 void	ft_getcdata(int type, t_arg *la, va_list ap)

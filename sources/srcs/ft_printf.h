@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 10:02:23 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/14 06:46:51 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/18 13:27:26 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,12 @@ char				*ft_chex(void *ptr, long long n, int t);
 ** ft_eflag.c
 */
 void				ft_init_ef(t_arg *arg, int mod);
+
+void				ft_dis_ef(t_arg *arg);
+
+/*
+** ft_format.c
+*/
+char				*ft_format_str(char *str, t_arg *args);
 
 #endif
