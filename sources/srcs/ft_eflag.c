@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 06:42:21 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/18 12:42:13 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/19 11:15:50 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static void		ft_see_sign(t_arg *arg, char c)
 	if (c == ' ' && arg->ef->positive != 1)
 	{
 		if (arg->ef->positive == 0)
-			arg->ef->positive = 2;
+			arg->ef->positive = 32;
 	}
 	else if (c == '+')
-		arg->ef->positive = 1;
+		arg->ef->positive = 43;
 	if (arg->type >= 5 && arg->type <= 8)
 		arg->ef->positive = 0;
 }
