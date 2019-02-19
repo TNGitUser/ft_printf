@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 13:15:09 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/18 13:42:35 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/19 10:37:08 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(void)
 	printf("%-10.5li\n", (long long)9223372036854775807);//32768);
 	//ft_printf("%-10.15%o\n");
 	//printf("%-10.15%o\n");*/
-	ft_printf("Bonjour, je suis %15s %15s, j'ai %0+15i ans.\n", "Lucas", "Martin", 22);
-	printf("Bonjour, je suis %15s %15s, j'ai %0+15i ans.\n", "Lucas", "Martin", 22);
+	ft_printf("Bonjour, je suis %-15s %-15s, j'ai %+20.17i ans.\n", "Lucas", "Martin", 22);
+	printf("Bonjour, je suis %7lls, j'ai %+20.17i ans.\n",  "Martin", 22);
 	return (0);
 }

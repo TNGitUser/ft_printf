@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 14:29:15 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/18 10:31:51 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/19 09:41:29 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ int		ft_getctype(char *str, int i)
 	else if (str[i] == '%')
 		return (9);
 	return (-1);
-}
-
-static void	ft_idontknow()
-{
-
 }
 
 int		ft_iseflag(char *str, int i)
