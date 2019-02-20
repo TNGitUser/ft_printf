@@ -6,7 +6,7 @@
 /*   By: lucmarti <lucmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 10:53:21 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/14 04:55:00 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/20 14:27:19 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# define ABS(Value)	(Value > 0 ? Value : Value * -1)
 # define MIN_INT	-2147483648
 # define MAX_INT	2147483647
+# define MIN_LONG	-9223372036854775808
+# define MAX_LONG	9223372036854775807
 
 typedef struct		s_list
 {
@@ -100,6 +101,8 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
+char				*ft_ltoa(long long n);
+char				*ft_ftoa(long double n, int pr);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);
@@ -147,7 +150,7 @@ int					scal_vector3(t_vector3 *u, t_vector3 *v, int free);
 t_vector2			*vector2_copy(t_vector2 *src);
 t_vector3			*vector3_copy(t_vector3 *src);
 
-double				ft_abs(double x);
+long double			ft_abs(long double x);
 int					ft_max(int a, int b);
 int					ft_atoi_base(char *nb, int base);
 int					ft_power(int x, int n);

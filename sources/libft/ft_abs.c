@@ -6,11 +6,11 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 10:48:20 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/01/16 10:48:38 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/20 13:44:30 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-double	ft_abs(double x)
+long double	ft_abs(long double x)
 {
 	return (x < 0 ? -x : x);
 }

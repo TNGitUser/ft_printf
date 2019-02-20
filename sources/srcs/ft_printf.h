@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 10:02:23 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/19 09:41:55 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/20 13:38:48 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <stdio.h>
 
-# include "libft.h"
+# include "../libft/libft.h"
 
 /*
 ** af		: Alternate form (#)

@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 14:29:15 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/19 09:41:29 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/20 13:03:25 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,13 +120,9 @@ t_arg	*ft_readarg(char *str, va_list ap)
 	cv->str = str;
 	cv->type = type;
 	cv->data = NULL;
-	ft_getcdata(type, cv, ap);
-	ft_init_ef(cv, mod);
 	if (!ft_checknflag(mod, type))
-	{
-		ft_memdel((void **)&str);
-		ft_memdel((void **)&cv);
-		return (NULL);
-	}
+		mod = 0;
+	ft_init_ef(cv, mod);
+	ft_getcdata(type, cv, ap);
 	return (cv);
 }

@@ -6,20 +6,20 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 13:24:07 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/20 13:40:06 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/20 13:43:46 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_getlength(int c)
+static int	ft_getlength(long long c)
 {
-	int i;
-
+	int	i;
+	
 	if (c == 0)
 		return (1);
 	i = 0;
-	if (c == MIN_INT)
+	if (c == (-9223372036854775807 - 1))
 	{
 		i = 1;
 		c = c / 10;
@@ -33,7 +33,7 @@ static int	ft_getlength(int c)
 	return (i);
 }
 
-char		*ft_itoa(int n)
+char		*ft_ltoa(long long n)
 {
 	char	*str;
 	int		len;

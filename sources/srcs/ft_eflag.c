@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 06:42:21 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/20 11:25:40 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/20 15:43:44 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ static void		ft_set_ef(t_arg *arg)
 			while (str[i] <= '9' && str[i] >= '0')
 				++i;
 		}
+		else if (str[i] == '.' && (str[i + 1] > '9' || str[i + 1] < '0'))
+			arg->ef->pr = 0;
 		++i;
 	}
 	ft_is_ignored(arg);

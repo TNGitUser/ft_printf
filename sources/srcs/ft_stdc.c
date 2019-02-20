@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 18:29:18 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/14 05:05:51 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/20 13:50:03 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,16 @@ void	ft_cptr(t_arg *la, va_list ap)
 
 void	ft_cint(t_arg *la, va_list ap)
 {
-	char	*out;
-	int		nu;
+	char		*out;
+	long long	nu;
 
-	nu = va_arg(ap, int);
-	if (!(out = ft_itoa(nu)))
+	if (la->ef->lmod == 10)
+		nu = va_arg(ap, long);
+	else if (la->ef->lmod == 20)
+		nu = va_arg(ap, long long);
+	else
+		nu = va_arg(ap, int);
+	if (!(out = ft_ltoa(nu)))
 		exit(1);
 	la->data = (void *)out;
 }

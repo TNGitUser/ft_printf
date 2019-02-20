@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:33:06 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/14 06:40:13 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/20 13:01:09 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static size_t		ft_hcount(long unsigned n, int base)
 {
 	size_t c;
 
-	c = 0;
+	c = (n == 0 ? 1 : 0);
 	while (n > 0)
 	{
 		++c;
@@ -50,6 +50,7 @@ char				*ft_chex(void *ptr, long long n, int t)
 	if (!(out = malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	out[len] = '\0';
+	out[0] = '0';
 	len--;
 	res = 0;
 	while (lptr > 0)

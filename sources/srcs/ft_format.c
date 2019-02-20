@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 10:58:23 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/20 12:25:30 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/20 16:10:15 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static size_t	ft_compute_size(t_arg *arg)
 	if (((char *)arg->data)[0] == '-')
 		size += 1;
 	//size += ft_strlen((char *)arg->data);
-	printf("Output size : %li\n", size);
+	//printf("Output size : %li\n", size);
 	return (size);
 }
 
@@ -82,14 +82,15 @@ static void	ft_format_aux(char *out, t_arg *arg)
 		prl = ef->pr;
 	if (fsl != 0 || prl < fsl)
 		signpos = fsl;
-
-	printf("fsize     : %i\n", ef->fsize);
+	if (arg->type == 4)
+		prl = 0;
+	/*printf("fsize     : %i\n", ef->fsize);
 	printf("precision : %i\n", ef->pr);
 	printf("fsl : %i\n", fsl);
 	printf("prl : %i\n", prl);
 	printf("fsl : %i\n", fsl);
 	printf("prl : %i\n", prl);
-	printf("signpos : %i\n", signpos);
+	printf("signpos : %i\n", signpos);*/
 
 
 
@@ -121,6 +122,8 @@ static void	ft_format_aux(char *out, t_arg *arg)
 	}
 	if (prl >= 0 && (arg->type == 0 || arg->type == 1)) 
 	{
+		if (ef->pr == 0 && ef->fsize == 0)
+			prl = ft_strlen(arg->data);
 		while (((char *)(arg->data))[l] != '\0' && prl > 0)
 		{
 			out[i++] = ((char *)(arg->data))[l];
