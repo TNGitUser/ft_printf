@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 10:58:23 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/19 15:35:00 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/20 12:25:30 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,43 @@ static void	ft_format_aux(char *out, t_arg *arg)
 	int		i;
 	int		l;
 
+	signpos = 0;
 	ef = arg->ef;
 	sign = ef->positive;
 	fsl = ef->fsize;
-	prl = ef->pr - ft_strlen(arg->data);
+	prl = ef->pr;
 	i = 0;
 	l = 0;
+
+	if (prl != 0)
+		fsl = fsl - ft_strlen(arg->data);
+	fsl = fsl - ft_strlen(arg->data);
+	prl = ((int)(prl - ft_strlen(arg->data)) > 0 ? (prl - ft_strlen(arg->data)) : 0);
+	if (ef->positive)
+		fsl -= 1;
+	if (((char *)(arg->data))[l] == '-')
+		prl += 1;
+	if ((arg->type == 2 || arg->type == 1) && prl > ft_strlen(arg->data))
+		prl = 0;//ft_strlen(arg->data);
+	fsl = fsl - prl > 0 ? fsl - prl : 0;
+	if ((arg->type == 2 || arg->type == 1) && ef->pr > ft_strlen(arg->data))
+		prl = ft_strlen(arg->data);
+	else if (ef->pr < ft_strlen(arg->data))
+		prl = ef->pr;
+	if (fsl != 0 || prl < fsl)
+		signpos = fsl;
+
 	printf("fsize     : %i\n", ef->fsize);
 	printf("precision : %i\n", ef->pr);
 	printf("fsl : %i\n", fsl);
 	printf("prl : %i\n", prl);
-	if (fsl > prl)
-	{
-		fsl = fsl - prl - ft_strlen(arg->data);
-	}
-	else
-	{
-		fsl = 0;
-		prl -= ft_strlen(arg->data) - 1;
-		signpos = 0;
-	}
 	printf("fsl : %i\n", fsl);
 	printf("prl : %i\n", prl);
 	printf("signpos : %i\n", signpos);
+
+
+
+
 	if (signpos == 0)
 	{
 		if (((char *)(arg->data))[l] == '-')
@@ -95,13 +109,33 @@ static void	ft_format_aux(char *out, t_arg *arg)
 		ft_add_fc(out, '0', fsl, &i);
 	else
 		ft_add_fc(out, ' ', fsl, &i);
-	if (i == signpos && ef->positive != 0)
-		ft_add_fc(out, sign, fsl, &i);
-	ft_add_fc(out, '0', prl, &i);
-	while (((char *)(arg->data))[l] != '\0')
+	if (i == signpos)
 	{
-		out[i++] = ((char *)(arg->data))[l];
-		++l;
+		if (((char *)(arg->data))[l] == '-')
+		{
+			++l;
+			ft_add_fc(out, '-', 1, &i);
+		}
+		else if (ef->positive)
+			ft_add_fc(out, sign, 1, &i);
+	}
+	if (prl >= 0 && (arg->type == 0 || arg->type == 1)) 
+	{
+		while (((char *)(arg->data))[l] != '\0' && prl > 0)
+		{
+			out[i++] = ((char *)(arg->data))[l];
+			++l;
+			--prl;
+		}
+	}
+	else
+	{
+		ft_add_fc(out, '0', prl, &i);
+		while (((char *)(arg->data))[l] != '\0')
+		{
+			out[i++] = ((char *)(arg->data))[l];
+			++l;
+		}
 	}
 }
 

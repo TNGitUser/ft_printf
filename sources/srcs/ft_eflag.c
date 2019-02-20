@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 06:42:21 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/19 11:15:50 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/20 11:25:40 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static void		ft_is_ignored(t_arg *arg)
 		ef->af = 0;
 	if (arg->type >= 0 && arg->type <= 2)
 	{
-		ef->zero = 0;
+		if (arg->type != 1)
+			ef->zero = 0;
 		ef->positive = 0;
 	}
 }
