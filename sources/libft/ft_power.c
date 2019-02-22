@@ -6,18 +6,16 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 12:25:49 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/01/28 14:00:50 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/22 11:05:05 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_power(int x, int n)
+unsigned long long	ft_power(unsigned long long x, unsigned long long n)
 {
 	if (n == 1)
 		return (x);
 	else if (n == 0)
 		return (1);
-	if (n < 0)
-		return (0);
 	else
 		return (x * ft_power(x, n - 1));
 }

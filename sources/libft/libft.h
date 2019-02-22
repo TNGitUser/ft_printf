@@ -6,7 +6,7 @@
 /*   By: lucmarti <lucmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 10:53:21 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/20 14:27:19 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/22 11:01:39 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 # define MIN_INT	-2147483648
 # define MAX_INT	2147483647
-# define MIN_LONG	-9223372036854775808
-# define MAX_LONG	9223372036854775807
+# define MIN_LONG	-9223372036854775808U
+# define MAX_LONG	9223372036854775807U
 
 typedef struct		s_list
 {
@@ -153,7 +153,7 @@ t_vector3			*vector3_copy(t_vector3 *src);
 long double			ft_abs(long double x);
 int					ft_max(int a, int b);
 int					ft_atoi_base(char *nb, int base);
-int					ft_power(int x, int n);
+unsigned long long	ft_power(unsigned long long x, unsigned long long n);
 
 t_matrix			*mat_create(size_t lx, size_t ly);
 void				mat_display(t_matrix *mat);

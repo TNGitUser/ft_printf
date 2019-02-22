@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 13:15:09 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/20 16:23:24 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/22 16:38:34 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ int	main(void)
 	//printf("%-10.15%o\n");*/
 	//ft_printf("Bonjour, je suis %.1s %.1s, j'ai [%lli] ans.\n", "Lucas", "Martin", LONG_MIN);
 	//printf("Bonjour, je suis [%.1s], j'ai     [%lli] ans.\n",  "Martin", LONG_MIN);
-	ft_printf("[%.80f]\n",                             9999.156405764);
-	printf("                               [%.80f]\n", 9999.156405764);
+	ft_printf("[%.20f]\n", .9);//9999.15640576454555555000000000000000000000000000500);
+	printf("[%.20f]\n", .9);//9999.1564057645455555000000000000000000000000000500);
+	printf("[%lli]\n", ft_power(2, 32));
 //	printf("								 [%.9999993899999999f]\n", 9999.156405764);
 	return (0);
 }

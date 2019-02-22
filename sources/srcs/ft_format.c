@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 10:58:23 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/20 16:10:15 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/22 09:51:29 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ static char	*ft_man_fs(t_arg *arg)
 	content[s - 1] = '\0';
 	i = 0;
 	ft_format_aux(content, arg);
-	printf("Converted and formatted data : [%s]\n", content);
+	printf("Converted and formatted data :\n[%s]\n", content);
 	return (content);
 }
 

@@ -6,23 +6,22 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 21:13:30 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/20 16:02:48 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/22 15:11:20 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+#include <float.h>
 void		ft_cflt(t_arg *la, va_list ap)
 {
 	char		*out;
-	double		nu;
+	long double	nu;
 
 	out = NULL;
 	if (la->ef->lmod == 50)
 		nu = va_arg(ap, long double);
 	else
 		nu = va_arg(ap, double);
-	printf("arg : %f\n", nu);
 	if (!(out = ft_ftoa(nu, la->ef->pr)))
 		out = ft_strdup("(null)");
 	printf("out : [%s]\n", out);
