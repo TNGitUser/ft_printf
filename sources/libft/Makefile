@@ -6,7 +6,7 @@
 #    By: lucmarti <lucmarti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 15:37:09 by lucmarti          #+#    #+#              #
-#    Updated: 2019/02/20 14:22:34 by lucmarti         ###   ########.fr        #
+#    Updated: 2019/03/04 15:52:46 by lucmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ SRC +=	./ft_ltoa.c
 SRC +=	./ft_ftoa.c
 
 # This is a minimal set of ANSI/VT100 color codes
-_END=\x1b[0m
+End=\x1b[0m
 _BOLD=\x1b[1m
 _UNDER=\x1b[4m
 _REV=\x1b[7m
@@ -104,21 +104,20 @@ _REV=\x1b[7m
 # Colors
 _GREY=\x1b[30m
 _RED=\x1b[31m
-_GREEN=\x1b[32m
+Green=\x1b[32m
 _YELLOW=\x1b[33m
 _BLUE=\x1b[34m
 _PURPLE=\x1b[35m
-_CYAN=\x1b[36m
+Cyan=\x1b[36m
 _WHITE=\x1b[37m
 
 OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "${_CYAN}Compilation done${_END}"
 	@ar -rc $(NAME) $(OBJ) libft.h
-	@echo "${_GREEN}Library created${_END}"
 	@ranlib $(NAME)
+	@echo "Compilation of $(Cyan)$(NAME)$(End) :       $(Green)done${End}"
 
 %.o: %.c libft.h
 	@gcc -Wall -Wextra -Werror -o $@ -c $<
@@ -126,10 +125,8 @@ $(NAME): $(OBJ)
 clean:
 	@rm -f $(OBJ)
 	@rm -f *.o
-	@echo "${_RED}Objects cleaned${_END}"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "${_RED}Output deleted${_END}"
 
 re: fclean all

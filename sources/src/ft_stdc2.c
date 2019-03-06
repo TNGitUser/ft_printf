@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 21:13:30 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/22 15:11:20 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/02/22 17:16:44 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void		ft_cflt(t_arg *la, va_list ap)
 		nu = va_arg(ap, double);
 	if (!(out = ft_ftoa(nu, la->ef->pr)))
 		out = ft_strdup("(null)");
-	printf("out : [%s]\n", out);
 	la->data = (void *)out;
 }
 

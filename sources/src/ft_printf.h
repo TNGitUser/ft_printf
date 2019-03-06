@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 10:02:23 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/20 13:38:48 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/03/06 11:18:49 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,15 @@ void				ft_dis_ef(t_arg *arg);
 ** ft_format.c
 */
 char				*ft_format_str(const char *str, t_arg *args);
+
+/*
+** ft_print_string.c
+*/
+char				*printf_string(t_arg *args);
+
+/*
+** ft_print_int.c
+*/
+char				*printf_int(t_arg *args);
 
 #endif

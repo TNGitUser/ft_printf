@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 06:42:21 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/20 15:43:44 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/03/06 13:18:58 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void		ft_is_ignored(t_arg *arg)
 	t_eflag	*ef;
 
 	ef = arg->ef;
+	if (ef->pr != 0 )
+		ef->zero = 0;
 	if (ef->zero != 0 && ef->lalign != 0)
 		ef->zero = 0;
 	if (arg->type >= 0 && arg->type <= 3 && ef->af == 1)

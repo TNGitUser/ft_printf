@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 10:58:23 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/22 09:51:29 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/03/06 11:16:30 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@ static size_t	ft_compute_size(t_arg *arg)
 	//size += ft_strlen((char *)arg->data);
 	//printf("Output size : %li\n", size);
 	return (size);
-}
-
-static int	ft_is_signed(char *str, int positive)
-{
-	if (positive || str[0] == '-')
-		return (1);
-	return (0);
 }
 
 static void ft_add_fc(char *out, char c, int n, int *i)
@@ -73,12 +66,12 @@ static void	ft_format_aux(char *out, t_arg *arg)
 		fsl -= 1;
 	if (((char *)(arg->data))[l] == '-')
 		prl += 1;
-	if ((arg->type == 2 || arg->type == 1) && prl > ft_strlen(arg->data))
+	if ((arg->type == 2 || arg->type == 1) && (size_t)prl > ft_strlen(arg->data))
 		prl = 0;//ft_strlen(arg->data);
 	fsl = fsl - prl > 0 ? fsl - prl : 0;
-	if ((arg->type == 2 || arg->type == 1) && ef->pr > ft_strlen(arg->data))
+	if ((arg->type == 2 || arg->type == 1) && (size_t)ef->pr > ft_strlen(arg->data))
 		prl = ft_strlen(arg->data);
-	else if (ef->pr < ft_strlen(arg->data))
+	else if ((size_t)ef->pr < ft_strlen(arg->data))
 		prl = ef->pr;
 	if (fsl != 0 || prl < fsl)
 		signpos = fsl;
@@ -178,7 +171,7 @@ char	*ft_get_argx(t_arg *head, int index)
 	return (NULL);
 }
 
-char	*ft_sub_nc(char *str)
+char	*ft_sub_nc(const char *str)
 {
 	int		i;
 	char	*ret;
@@ -200,7 +193,12 @@ char	*ft_format_str(const char *str, t_arg *args)
 	out = NULL;
 	while (head != NULL)
 	{
-		ft_man_fs(head);
+		if (head->type == 1)
+			printf("[%s]\n", printf_string(head));
+		else if (head->type == 3)
+			printf("[%s]\n", printf_int(head));
+		else
+			ft_man_fs(head);
 		head = head->next;
 	}
 	if (str[0] == '%')
