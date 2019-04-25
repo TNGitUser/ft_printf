@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 10:50:01 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/01/09 11:20:09 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/04/15 10:26:47 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_matrix	*mat_add(t_matrix *m1, t_matrix *m2, int del)
 	int			i;
 	int			j;
 
-	if (!m1 || !m2 || !check_size(m1, m2) ||
-			!(res = mat_create(m1->dim->x, m2->dim->y)))
+	if (!m1 || !m2 || !check_size(m1, m2)
+			|| !(res = mat_create(m1->dim->x, m2->dim->y)))
 		return (NULL);
 	i = 0;
 	while (i < m1->dim->x)
@@ -53,8 +53,8 @@ t_matrix	*mat_sub(t_matrix *m1, t_matrix *m2, int del)
 	int			i;
 	int			j;
 
-	if (!m1 || !m2 || !check_size(m1, m2) ||
-			!(res = mat_create(m1->dim->x, m2->dim->y)))
+	if (!m1 || !m2 || !check_size(m1, m2)
+			|| !(res = mat_create(m1->dim->x, m2->dim->y)))
 		return (NULL);
 	i = 0;
 	while (i < m1->dim->x)

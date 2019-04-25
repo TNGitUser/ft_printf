@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 15:18:52 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/09 13:21:56 by lucmarti         ###   ########.fr       */
+/*   Created: 2019/04/25 10:01:41 by lucmarti          #+#    #+#             */
+/*   Updated: 2019/04/25 10:31:44 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "ft_printf.h"
 
-void	ft_putnbr(long long n)
+int	ft_printf(char *text, ...)
 {
-	char	c;
-	int		sign;
-
-	sign = 1;
-	if (n < 0)
-	{
-		write(1, "-", 1);
-		sign = -1;
-	}
-	c = (n % 10) > 0 ? (n % 10) + '0' : (((n % 10) * -1) + '0');
-	n = n / 10 * sign;
-	if (n > 0)
-		ft_putnbr(n);
-	write(1, &c, 1);
+	(void)text;
+	return (0);
 }

@@ -6,9 +6,19 @@
 #    By: lucmarti <lucmarti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 15:37:09 by lucmarti          #+#    #+#              #
-#    Updated: 2019/03/04 15:52:46 by lucmarti         ###   ########.fr        #
+#    Updated: 2019/04/25 14:52:15 by lucmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+ifndef ECHO
+#T := $(shell $(MAKE) $(MAKECMDGOALS) --no-print-directory \
+#	-nrRf $(firstword $(MAKEFILE_LIST)) \
+#	ECHO="COUNTTHIS" | grep -c "COUNTTHIS")
+T = $(words $(SRC))
+N := x
+C = $(words $N)$(eval N := x $N)
+ECHO = echo "\r	[`expr $C '*' 100 / $T`%]\c"
+endif
 
 NAME = libft.a
 
@@ -23,6 +33,8 @@ SRC +=	./ft_isblank.c
 SRC +=	./ft_isprint.c
 SRC +=	./ft_isupper.c
 SRC +=	./ft_itoa.c
+SRC +=	./ft_ltoa.c
+SRC +=	./ft_ftoa.c
 SRC +=	./ft_lstadd.c
 SRC +=	./ft_lstadd_back.c
 SRC +=	./ft_lstdel.c
@@ -92,11 +104,9 @@ SRC +=	./ft_power.c
 SRC +=	./ft_abs.c
 SRC +=	./ft_iscinstr.c
 SRC +=	./ft_strfchr.c
-SRC +=	./ft_ltoa.c
-SRC +=	./ft_ftoa.c
 
 # This is a minimal set of ANSI/VT100 color codes
-End=\x1b[0m
+_END=\x1b[0m
 _BOLD=\x1b[1m
 _UNDER=\x1b[4m
 _REV=\x1b[7m
@@ -104,27 +114,47 @@ _REV=\x1b[7m
 # Colors
 _GREY=\x1b[30m
 _RED=\x1b[31m
-Green=\x1b[32m
+_GREEN=\x1b[32m
 _YELLOW=\x1b[33m
 _BLUE=\x1b[34m
 _PURPLE=\x1b[35m
-Cyan=\x1b[36m
+_CYAN=\x1b[36m
 _WHITE=\x1b[37m
 
-OBJ = $(SRC:.c=.o)
-all: $(NAME)
+OBJ_PATH = ./objs
+OBJ_FILE = $(SRC:.c=.o)
+
+OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_FILE))
+
+ifndef VERBOSE
+.SILENT:
+VERBOSE = 0
+endif
+
+all: start $(NAME)
+
+start:
+	@echo "Compilation of $(_CYAN)libft$(_END)   :    $(_YELLOW)Started${_END}"
 
 $(NAME): $(OBJ)
 	@ar -rc $(NAME) $(OBJ) libft.h
+	@echo "\rCompilation of $(_CYAN)libft$(_END)   :    $(_GREEN)Done${_END}"
 	@ranlib $(NAME)
-	@echo "Compilation of $(Cyan)$(NAME)$(End) :       $(Green)done${End}"
 
-%.o: %.c libft.h
+$(OBJ_PATH)/%.o: %.c libft.h 
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@gcc -Wall -Wextra -Werror -o $@ -c $<
+	@$(ECHO)
+ifeq ("$(VERBOSE)","1")
+	@echo "[${_YELLOW}libft${_END}][${_GREEN}Compiled${_END}] : $<"
+endif
+
+.PHONY: clean fclean re
 
 clean:
 	@rm -f $(OBJ)
-	@rm -f *.o
+	@rmdir $(OBJ_PATH) 2> /dev/null || (true && if [ -d "$(OBJ_PATH)" ]; then\
+		echo "$(Red)ERROR$(End)	: $(OBJ_PATH) is not empty."; fi)
 
 fclean: clean
 	@rm -f $(NAME)

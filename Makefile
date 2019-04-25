@@ -1,73 +1,77 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    M                                                  :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/02/08 09:51:24 by lucmarti          #+#    #+#              #
-#    Updated: 2019/03/06 11:18:18 by lucmarti         ###   ########.fr        #
+#    Created: 2019/03/28 15:42:43 by lucmarti          #+#    #+#              #
+#    Updated: 2019/04/25 10:31:20 by lucmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+Red=\x1b[31m
 Green=\x1b[32m
 Cyan=\x1b[36m
+Yellow=\x1b[34m
 End=\x1b[0m
 
-TARGET = libftprintf.a
-DEBTARGET = printf
+NAME = ft_printf
 
 SRC_PATH = ./src
-SRC_FILE := ft_printf.c ft_args.c ft_stdc.c ft_hex.c ft_stdc2.c
-SRC_FILE += ft_eflag.c ft_format.c ft_print_string.c ft_print_int.c
+SRC_FILE = main.c ft_printf.c
 
 OBJ_PATH = ./objs
 OBJ_FILE = $(SRC_FILE:.c=.o)
+DEPS_FILE = $(SRC_FILE:.c=.d)
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_FILE))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_FILE))
+DEPS = $(addprefix $(OBJ_PATH)/,$(DEPS_FILE))
 
-CPPFLAGS = -I includes -I libft
-CFLAGS = -Wall -Wextra #-Werror 
+CFLAGS = -Wall -Wextra -Werror -g3 -I./includes -I./libft
+CPPFLAGS = -MMD -MP
+LIB = $(OBJ_PATH)/libft.a
 
 ifndef VERBOSE
 .SILENT:
+VERBOSE=0
 endif
 
-all: $(TARGET)
+all: $(NAME)
 
-$(TARGET): $(OBJ) 
-	@$(MAKE) -C libft/
-	@gcc $(CFLAGS) libft/libft.a -o $(TARGET) $(OBJ)
-	@ar -r $(TARGET) $(OBJ)
-	@ranlib $(TARGET)
-	@echo "Compilation of $(Cyan)$(TARGET)$(End) :       $(Green)done${End}"
-
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c ./includes/
+$(NAME): $(OBJ)
+	@$(MAKE) -C ./libft "VERBOSE=$(VERBOSE)"
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	gcc $(CFLAGS) -c $< $(CPPFLAGS) -o $@
+	@cp -a libft/libft.a $(OBJ_PATH)/libft.a
+	@gcc $(CFLAGS) -o $(NAME) $(OBJ) $(LIB)
+	@echo "Compilation of $(Cyan)$(NAME)$(End)   :    ${Green}Done${End}"
 
-.PHONY: deb clean fclean re
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
+	@gcc $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+	@echo "[${Green}Compiled${End}] : $<"
 
-deb: $(OBJ)
-	@$(MAKE) -C libft/
-	@gcc $(CFLAGS) $(CPPFLAGS) $(DEB) ./src/main.c libft/libft.a -o $(DEBTARGET) $(OBJ)
-	@echo "Compilation of $(Cyan)$(DEBTARGET)$(End)  :       $(Green)done${End}"
+.PHONY: clean fclean miniclean minire re
 
 clean:
-	@$(MAKE) -C libft/ clean
-	@rmdir $(OBJ_PATH) 2> /dev/null || true
 	@rm -f $(OBJ)
-	@echo "Printf : Removing objects"
-
-fcleand: clean
-	@$(MAKE) -C libft/ fclean
-	@rm -f $(DEBTARGET)
-	@echo "Printf : Removing printf"
+	@rm -f $(LIB)
+	@$(RM) $(DEPS)
+	@$(MAKE) -C ./libft/ clean 
+	@rmdir $(OBJ_PATH) 2> /dev/null || (true && if [ -d "$(OBJ_PATH)" ]; then\
+		echo "$(Red)ERROR$(End)	: $(OBJ_PATH) is not empty."; fi)
+	@echo "$(Red)$(NAME)$(End) : Removing objects"
 
 fclean: clean
-	@$(MAKE) -C libft/ fclean
-	@rm -f $(TARGET)
-	@echo "Printf : Removing libftprintf.a"
+	@rm -f $(NAME)
+	@$(MAKE) -C ./libft/ fclean 
+	@echo "$(Red)$(NAME)$(End) : Removing $(NAME)"
+
+miniclean:
+	@rm -f $(OBJ)
+
+minire: miniclean all
 
 re: fclean all
+-include $(DEPS)

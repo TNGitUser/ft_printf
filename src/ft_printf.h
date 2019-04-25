@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 15:18:52 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/09 13:21:56 by lucmarti         ###   ########.fr       */
+/*   Created: 2019/04/25 10:02:25 by lucmarti          #+#    #+#             */
+/*   Updated: 2019/04/25 10:23:45 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-void	ft_putnbr(long long n)
-{
-	char	c;
-	int		sign;
+# include <unistd.h>
+# include <stdlib.h>
 
-	sign = 1;
-	if (n < 0)
-	{
-		write(1, "-", 1);
-		sign = -1;
-	}
-	c = (n % 10) > 0 ? (n % 10) + '0' : (((n % 10) * -1) + '0');
-	n = n / 10 * sign;
-	if (n > 0)
-		ft_putnbr(n);
-	write(1, &c, 1);
-}
+# include "../libft/libft.h"
+
+int	ft_printf(char *text, ...);
+
+#endif
