@@ -6,14 +6,44 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 10:01:41 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/25 10:31:44 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/04/29 12:34:43 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(char *text, ...)
+/*
+**	print_ud (useless data) : Will print data until arg is found
+*/
+
+void	print_ud(t_trail *core, char *text, int cur)
 {
-	(void)text;
-	return (0);
+	while (text[cur] != '\0')
+	{
+		if (text[cur] == '%')
+			cur += parse_arg((text + cur));
+		else
+		{
+			ft_putchar(text[cur]);
+			core->printed += 1;
+			++cur;
+		}
+	}
+}
+
+/*
+**	ft_printf : Main function fo ft_printf, will start all the machinery.
+*/
+
+int		ft_printf(char *text, ...)
+{
+	int		ret;
+	t_trail *core;
+
+	core = trail_init(text);
+	va_start(core->ap, text);
+	print_ud(core, text, 0);
+	ret = core->printed;
+	trail_free(core);
+	return (ret);
 }

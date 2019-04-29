@@ -6,7 +6,7 @@
 #    By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/28 15:42:43 by lucmarti          #+#    #+#              #
-#    Updated: 2019/04/25 10:31:20 by lucmarti         ###   ########.fr        #
+#    Updated: 2019/04/29 15:48:16 by lucmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ End=\x1b[0m
 NAME = ft_printf
 
 SRC_PATH = ./src
-SRC_FILE = main.c ft_printf.c
+SRC_FILE = main.c ft_printf.c error.c init.c parser.c bool.c peacemaker.c\
+		   hex.c
 
 OBJ_PATH = ./objs
 OBJ_FILE = $(SRC_FILE:.c=.o)
@@ -29,7 +30,7 @@ SRC = $(addprefix $(SRC_PATH)/,$(SRC_FILE))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_FILE))
 DEPS = $(addprefix $(OBJ_PATH)/,$(DEPS_FILE))
 
-CFLAGS = -Wall -Wextra -Werror -g3 -I./includes -I./libft
+CFLAGS = -Wall -Wextra -g3 -I./includes -I./libft
 CPPFLAGS = -MMD -MP
 LIB = $(OBJ_PATH)/libft.a
 
