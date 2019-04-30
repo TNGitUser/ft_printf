@@ -6,7 +6,7 @@
 /*   By: lucmarti <lucmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 10:53:21 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/09 13:21:42 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/04/30 12:06:21 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,14 @@ int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoinf(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
+char				*ft_ltoa(long long n);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
+void				ft_putstrn(char const *s, size_t n);
 void				ft_putendl(char const *s);
 void				ft_putnbr(long long n);
 void				ft_putchar_fd(char c, int fd);

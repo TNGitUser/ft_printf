@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 10:02:25 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/29 16:02:14 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/04/30 12:11:58 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,35 @@ typedef struct	s_stat
 	int			pr;
 	char		fmt;
 	char		*mod;
+	char		*str;
 
 }				t_stat;
+
+/*
+**	print.c
+*/
+void			print_int(t_stat *arg, t_trail *core, int len);
+
+/*
+**	print.c
+*/
+void			print_trail(t_stat *arg, t_trail *core, int *i, int len);
+void			print_ptr(t_stat *arg, t_trail *core, int len);
+void			print_str(t_stat *arg, t_trail *core, int len, int i);
+void			print_char(t_stat *arg, t_trail *core);
+void			print_start(t_stat *arg, t_trail *core);
+
+/*
+**	get_iuo.c
+*/
+char			*ft_cint(t_stat *arg, va_list ap);
+
+/*
+**	get_csp.c
+*/
+char			*ft_cchr(va_list ap);
+char			*ft_cptr(t_stat *arg, va_list ap);
+char			*ft_cstr(va_list ap);
 
 /*
 **	hex.c
@@ -68,7 +95,7 @@ void			set_priorities(t_stat *arg);
 /*
 **	parser.c
 */
-int				parse_arg(char *text);
+int				parse_arg(char *text, t_trail *core);
 
 /*
 **	ft_printf.c

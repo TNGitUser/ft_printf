@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 10:01:41 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/29 12:34:43 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/04/30 10:46:39 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_ud(t_trail *core, char *text, int cur)
 	while (text[cur] != '\0')
 	{
 		if (text[cur] == '%')
-			cur += parse_arg((text + cur));
+			cur += parse_arg((text + cur), core);
 		else
 		{
 			ft_putchar(text[cur]);

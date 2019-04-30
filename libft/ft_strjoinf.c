@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strjoinf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 14:35:07 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/30 13:25:47 by lucmarti         ###   ########.fr       */
+/*   Created: 2019/04/30 11:39:45 by lucmarti          #+#    #+#             */
+/*   Updated: 2019/04/30 13:37:58 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+char	*ft_strjoinf(char const *s1, char const *s2)
 {
-	if (s1 == NULL || s2 == NULL)
-		return (-1);
-	while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
-	{
-		++s1;
-		++s2;
-	}
-	return ((unsigned char)*s1 - (unsigned char)*s2);
+	char	*str;
+	size_t	len;
+
+	if (!s1 | !s2)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	str[0] = '\0';
+	str = ft_strcat(str, s1);
+	str = ft_strcat(str, s2);
+	ft_memdel((void **)&s2);
+	return (str);
 }

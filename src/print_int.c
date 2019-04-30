@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   print_int.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 14:35:07 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/30 13:25:47 by lucmarti         ###   ########.fr       */
+/*   Created: 2019/04/30 11:53:54 by lucmarti          #+#    #+#             */
+/*   Updated: 2019/04/30 13:20:46 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "ft_printf.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+void	print_int(t_stat *arg, t_trail *core, int len)
 {
-	if (s1 == NULL || s2 == NULL)
-		return (-1);
-	while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
+	char	*out;
+	int		i;
+
+	i = 0;
+	out = ft_cint(arg, core->ap);
+	len = ft_strlen(out);
+	arg->str = out;
+	print_trail(arg, core, &i, len);
+	if (!arg->adj || arg->fs < len)
 	{
-		++s1;
-		++s2;
+		ft_putstr(out);
+		core->printed += len;
 	}
-	return ((unsigned char)*s1 - (unsigned char)*s2);
+	ft_memdel((void **)&(arg->str));
+	arg->str = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 10:19:06 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/29 15:42:12 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/04/30 11:32:12 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ void	arg_init(t_stat *arg)
 	arg->form = 0;
 	arg->zero = 0;
 	arg->fs = 0;
-	arg->pr = 0;
+	arg->pr = -1;
 	arg->fmt = 0;
 	arg->mod = NULL;
+	arg->str = NULL;
 }
 
 void	arg_profs(char *text, int *cur, t_stat *arg, int type)
@@ -114,7 +115,7 @@ void	debug_var(t_stat *arg)
 **		correct parameters (flags, field width, precision, type, modifier).
 */
 
-int		parse_arg(char *text)
+int		parse_arg(char *text, t_trail *core)
 {
 	int		i;
 	t_stat	arg;
@@ -127,6 +128,7 @@ int		parse_arg(char *text)
 		err_die("\nft_printf: Bad conversion");
 	arg_set(&arg, text, text[i] == '\0' ? i : i + 1);
 	set_priorities(&arg);
-	debug_var(&arg);
+	//debug_var(&arg);
+	print_start(&arg, core);
 	return (text[i] == '\0' ? i : i + 1);
 }
