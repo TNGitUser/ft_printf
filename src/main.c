@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 09:48:25 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/30 11:57:35 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/04/30 14:13:16 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,26 @@ int	main(void)
 	printf("* : [%-20.187s]\n", "Null precision !");
 	ft_printf("- : [%-20.187s]\n", "Null precision !");
 	printf("* : [%020s]\n", "Zeros !");
-	ft_printf("- : [%020s]\n\n", "Zeros !");
+	ft_printf("- : [%020s]\n", "Zeros !");
+	printf("* : [%.3s is string]\n", "This");
+	ft_printf("- : [%.3s is string]\n", "This");
+	printf("* : [%10.s is string]\n", "This");
+	ft_printf("- : [%10.s is string]\n", "This");
+	printf("* : [%s]\n", "");
+	ft_printf("- : [%s]\n", "");
+	printf("* : [%10s]\n", "");
+	ft_printf("- : [%10s]\n\n", "");
+	printf("* : [%.2s is a string]\n", "this");
+	ft_printf("- : [%.2s is a string]\n", "this");
+	printf("* : [%5.2s is a string]\n", "this");
+	ft_printf("- : [%5.2s is a string]\n", "this");
 	// ------------------------------------------------------------------------
 	// ------------------------------------------ char test -----------------
 	printf("\n######## CHAR ########\n");
 	printf("* : [%c %c %c %c %c]\n", 'a', 75, 10, '@', '9');
-	ft_printf("- : [%c %c %c %c %c]\n\n", 'a', 75, 10, '@', '9');
+	ft_printf("- : [%c %c %c %c %c]\n", 'a', 75, 10, '@', '9');
+	printf("* : [%c %2c]\n", 0, NULL);
+	ft_printf("- : [%c %2c]\n\n", 0, NULL);
 	// ------------------------------------------------------------------------
 	// ------------------------------------------ integer test ----------------
 	printf("\n######## INTEGER ########\n");
