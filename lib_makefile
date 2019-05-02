@@ -6,7 +6,7 @@
 #    By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/28 15:42:43 by lucmarti          #+#    #+#              #
-#    Updated: 2019/04/30 13:52:51 by lucmarti         ###   ########.fr        #
+#    Updated: 2019/04/30 14:54:14 by lucmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ End=\x1b[0m
 NAME = libftprintf.a
 
 SRC_PATH = ./src
-SRC_FILE = main.c ft_printf.c error.c init.c parser.c bool.c peacemaker.c\
+SRC_FILE = ft_printf.c error.c init.c parser.c bool.c peacemaker.c\
 		   hex.c print.c get_csp.c get_iuox.c print_int.c
 
 OBJ_PATH = ./objs

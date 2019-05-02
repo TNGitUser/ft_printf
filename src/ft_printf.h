@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 10:02:25 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/30 12:11:58 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/02 12:41:07 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct	s_stat
 **	print.c
 */
 void			print_int(t_stat *arg, t_trail *core, int len);
+void			print_per(t_stat *arg, t_trail *core, int len);
 
 /*
 **	print.c

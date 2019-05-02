@@ -6,7 +6,7 @@
 /*   By: lucmarti <lucmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 10:53:21 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/30 12:07:21 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/04/30 14:46:22 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,4 +167,5 @@ t_matrix			*mat_mul(t_matrix *m1, t_matrix *m2, int del);
 
 int					ft_iscinstr(char *str, char c);
 char				*ft_strfchr(char *str, int c);
+char				*ft_straddc(char c, char *src, char target);
 #endif

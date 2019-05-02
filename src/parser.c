@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 10:19:06 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/30 11:32:12 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/02 13:03:11 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	arg_set(t_stat *arg, char *text, int len)
 		else if (text[i] == '-')
 			arg->adj = 1;
 		else if (text[i] == ' ' || text[i] == '+')
-			arg->form = text[i] == ' ' && arg->form != 2 ? 1 : 2;
+			arg->form = (text[i] == ' ' && arg->form != 2) ? 1 : 2;
 		else if ((text[i] >= '1' && text[i] <= '9') || text[i] == '.')
 			arg_profs(text, &i, arg, (text[i] == '.' ? 1 : 0));
 		else if (text[i] == 'l' || text[i] == 'h' || text[i] == 'L')
@@ -120,7 +120,7 @@ int		parse_arg(char *text, t_trail *core)
 	int		i;
 	t_stat	arg;
 
-	i = 0;
+	i = 1;
 	arg_init(&arg);
 	while (text[i] != '\0' && !is_type(text[i]))
 		++i;

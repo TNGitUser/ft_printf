@@ -6,35 +6,58 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 12:00:06 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/30 13:38:42 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/02 14:43:45 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_cint(t_stat *la, va_list ap)
+static int	ft_get_arg(long long *nu, va_list ap, t_stat *la)
+{
+	*nu = 0;
+	if (ft_strcmp(la->mod, "l") == 0)
+		*nu = va_arg(ap, long);
+	else if (ft_strcmp(la->mod, "ll") == 0)
+		*nu = va_arg(ap, long long);
+	else if ((ft_strcmp(la->mod, "h") == 0) || (ft_strcmp(la->mod, "hh") == 0))
+		*nu = (short int)(va_arg(ap, int));
+	else if (ft_strcmp(la->mod, "hh") == 0)
+		*nu = (int)((signed char)(va_arg(ap, int)));
+	else
+		*nu = va_arg(ap, int);
+	return (0);
+}
+
+void		ft_addz(char **out, t_stat *la, int len, long long nu)
+{
+	while (len < la->pr || (la->zero && len < la->fs))
+	{
+		if (nu < 0)
+			*out = ft_straddc('0', *out, '-');
+		else
+			*out = ft_strjoinf("0", *out);
+		++len;
+	}
+}
+
+char		*ft_cint(t_stat *la, va_list ap)
 {
 	char		*out;
 	long long	nu;
 	int			len;
 
 	out = NULL;
-	nu = 0;
-	if (ft_strcmp(la->mod, "l") == 0)
-		nu = va_arg(ap, long);
-	else if (ft_strcmp(la->mod, "ll") == 0)
-		nu = va_arg(ap, long long);
-	else
-		nu = va_arg(ap, int);
-	if (!(out = ft_ltoa(nu)))
+	if (ft_get_arg(&nu, ap, la) || !(out = ft_ltoa(nu)))
 		out = ft_strdup("(null)");
 	else
 	{
-		len = ft_strlen(out);
-		while (len < la->pr)
+		len = ft_strlen(out) - ((out[0] == '-') && (la->pr > 0) ? 1 : 0);
+		len += ((la->form != 0 ? 1 : 0) - (la->pr > len ? 1 : 0));
+		ft_addz(&out, la, len, nu);
+		if (la->form != 0 && nu >= 0)
 		{
-			out = ft_strjoinf("0", out);
-			++len;
+			out = ft_strjoinf(la->form == 2 ? "+" : " ", out);
+			la->pr += la->pr == -1 ? 0 : 1;
 		}
 	}
 	return (out);

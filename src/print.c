@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 10:43:19 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/30 12:10:40 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/02 13:49:33 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_trail(t_stat *arg, t_trail *core, int *i, int len)
 		if (*i == 0 && arg->adj)
 		{
 			ft_putstrn(arg->str, (arg->pr != -1 ? arg->pr : len));
-			core->printed += len;
+			core->printed += (arg->pr != -1 ? arg->pr : len);
 		}
 		if (arg->zero)
 			ft_putchar('0');
@@ -39,7 +39,11 @@ void	print_ptr(t_stat *arg, t_trail *core, int len)
 	arg->str = out;
 	len = ft_strlen(out);
 	i = 0;
-	arg->pr = arg->pr == 0 || arg->pr == -1 ? -1 : arg->pr + 2;
+	arg->pr = (arg->pr == 0 || arg->pr == -1) ? -1 : arg->pr + 2;
+	if (arg->pr < len && arg->adj)
+		arg->pr = len;
+	else if (arg->pr < len)
+		arg->pr = -1;
 	print_trail(arg, core, &i, len);
 	if (!arg->adj || arg->fs < len)
 	{
@@ -63,7 +67,7 @@ void	print_str(t_stat *arg, t_trail *core, int len, int i)
 	if (!arg->adj || arg->fs < len)
 	{
 		ft_putstrn(out, (arg->pr != -1 ? arg->pr : len));
-		core->printed += len;
+		core->printed += (arg->pr != -1 ? arg->pr : len);
 	}
 }
 
@@ -96,7 +100,7 @@ void	print_char(t_stat *arg, t_trail *core)
 	ft_memdel((void **)&out);
 }
 
-void		print_start(t_stat *arg, t_trail *core)
+void	print_start(t_stat *arg, t_trail *core)
 {
 	if (arg->fmt == 'c')
 		print_char(arg, core);
@@ -106,4 +110,6 @@ void		print_start(t_stat *arg, t_trail *core)
 		print_ptr(arg, core, 0);
 	else if (arg->fmt == 'i' || arg->fmt == 'd')
 		print_int(arg, core, 0);
+	else if (arg->fmt == '%')
+		print_per(arg, core, 0);
 }
