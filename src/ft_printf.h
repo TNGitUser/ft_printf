@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 10:02:25 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/06 10:23:51 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 12:55:25 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,15 @@ typedef struct	s_stat
 }				t_stat;
 
 /*
-**	print.c
+**	print_hf.c
+*/
+void			print_x(t_stat *arg, t_trail *core, int len, int type);
+
+/*
+**	print_int.c
 */
 void			print_oct(t_stat *arg, t_trail *core, int len);
+void			print_uint(t_stat *arg, t_trail *core, int len);
 void			print_int(t_stat *arg, t_trail *core, int len);
 void			print_per(t_stat *arg, t_trail *core, int len);
 
@@ -62,10 +68,17 @@ void			print_char(t_stat *arg, t_trail *core);
 void			print_start(t_stat *arg, t_trail *core);
 
 /*
+**	get_xXf.c
+*/
+char			*ft_cunh(t_stat *la, va_list ap, int type);
+
+/*
 **	get_iuo.c
 */
+void			ft_addz(char **out, t_stat *arg, int len, long long nu);
 char			*ft_cint(t_stat *arg, va_list ap);
 char			*ft_coct(t_stat *la, va_list ap);
+char			*ft_cund(t_stat *la, va_list ap);
 
 /*
 **	get_csp.c
@@ -90,6 +103,7 @@ void			trail_free(t_trail *core);
 **	bool.c
 */
 int				is_type(char c);
+int				is_mod(char c);
 
 /*
 **	peacemaker.c

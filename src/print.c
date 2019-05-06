@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 10:43:19 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/06 10:22:31 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 12:44:37 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void	print_char(t_stat *arg, t_trail *core)
 	{
 		if (i == 0 && arg->adj)
 		{
-			ft_putstr(out);
-			core->printed += ft_strlen(out);
+			ft_putchar(*out);
+			core->printed += 1;
 		}
 		if (arg->zero)
 			ft_putchar('0');
@@ -101,8 +101,8 @@ void	print_char(t_stat *arg, t_trail *core)
 	}
 	if (!arg->adj)
 	{
-		ft_putstr(out);
-		core->printed += ft_strlen(out);
+		ft_putchar(*out);
+		core->printed += 1;
 	}
 	ft_memdel((void **)&out);
 }
@@ -115,9 +115,13 @@ void	print_start(t_stat *arg, t_trail *core)
 		print_str(arg, core, 0, 0);
 	else if (arg->fmt == 'p')
 		print_ptr(arg, core, 0);
-	else if (arg->fmt == 'i' || arg->fmt == 'd')
+	else if (arg->fmt == 'i' || arg->fmt == 'd' || arg->fmt == 'D')
 		print_int(arg, core, 0);
-	else if (arg->fmt == 'o')
+	else if (arg->fmt == 'u' || arg->fmt == 'U')
+		print_uint(arg, core, 0);
+	else if (arg->fmt == 'x' || arg->fmt == 'X')
+		print_x(arg, core, 0, arg->fmt == 'x' ? 0 : 1);
+	else if (arg->fmt == 'o' || arg->fmt == 'O')
 		print_oct(arg, core, 0);
 	else if (arg->fmt == '%')
 		print_per(arg, core, 0);

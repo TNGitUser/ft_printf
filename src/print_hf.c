@@ -1,46 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bool.c                                             :+:      :+:    :+:   */
+/*   print_hf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/29 10:51:26 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/06 12:55:28 by lucmarti         ###   ########.fr       */
+/*   Created: 2019/05/06 10:54:02 by lucmarti          #+#    #+#             */
+/*   Updated: 2019/05/06 11:48:26 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	is_type(char c)
+void	print_x(t_stat *arg, t_trail *core, int len, int type)
 {
+	char	*out;
 	int		i;
-	char	*codex;
 
-	codex = "%icpsfdouxXDOU";
 	i = 0;
-	while (codex[i] != '\0')
-		if (codex[i++] == c)
-			return (1);
-	return (0);
-}
-
-int	is_mod(char c)
-{
-	int		i;
-	char	*codex;
-
-	codex = "Lhjlz";
-	i = 0;
-	if (c < codex[0] || c > codex[ft_strlen(codex)])
-		return (0);
-	while (codex[i] != '\0')
+	out = ft_cunh(arg, core->ap, type);
+	len = ft_strlen(out);
+	if (arg->pr != -1 && arg->pr < len)
+		arg->pr = len;
+	arg->str = out;
+	print_trail(arg, core, &i, len);
+	if (!arg->adj || arg->fs <= len)
 	{
-		if (c < codex[i])
-			return (0);
-		if (c == codex[i])
-			return (1);
-		++i;
+		ft_putstr(out);
+		core->printed += len;
 	}
-	return (0);
+	ft_memdel((void **)&(out));
+	arg->str = NULL;
 }

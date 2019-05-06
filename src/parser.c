@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 10:19:06 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/02 13:03:11 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 12:54:22 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	arg_mod(char *text, int *cur, t_stat *arg)
 	--i;
 	while (i >= 0)
 	{
-		if ((text[i] != 'l' && text[i] != 'h' && text[i] != 'L') || arg->mod)
+		if (is_mod(text[i]) || arg->mod)
 			break ;
 		if (text[i] == 'l' && text[i - 1] == 'l')
 			arg->mod = "ll";
@@ -62,8 +62,10 @@ void	arg_mod(char *text, int *cur, t_stat *arg)
 			arg->mod = "hh";
 		else if (text[i] == 'h' && text[i - 1] != 'h')
 			arg->mod = "h";
-		else if (text[i] == 'L')
-			arg->mod = "L";
+		else if (text[i] == 'L' || text[i] == 'j')
+			arg->mod = text[i] == 'L' ? "L" : "j";
+		else if (text[i] == 'z')
+			arg->mod = "z";
 		--i;
 	}
 	return ;
@@ -94,21 +96,6 @@ void	arg_set(t_stat *arg, char *text, int len)
 	}
 }
 
-void	debug_var(t_stat *arg)
-{
-	printf("\n\n");
-	printf("%10s : %i\n", "flags", arg->flags);
-	printf("%10s : %i\n", "alt", arg->alt);
-	printf("%10s : %i\n", "adj", arg->adj);
-	printf("%10s : %i\n", "form", arg->form);
-	printf("%10s : %i\n", "zero", arg->zero);
-	printf("%10s : %i\n", "fsize", arg->fs);
-	printf("%10s : %i\n", "precision", arg->pr);
-	printf("%10s : %s\n", "modifiers", arg->mod);
-	printf("%10s : %c\n", "fmt", arg->fmt);
-	printf("\n\n");
-}
-
 /*
 **	parse_arg : function that will read part of the text till the conversion
 **		type flag (from % to %/i/c/p/s/f/d/o/u/x/X) and will retrieve the
@@ -128,7 +115,6 @@ int		parse_arg(char *text, t_trail *core)
 		err_die("\nft_printf: Bad conversion");
 	arg_set(&arg, text, text[i] == '\0' ? i : i + 1);
 	set_priorities(&arg);
-	//debug_var(&arg);
 	print_start(&arg, core);
 	return (text[i] == '\0' ? i : i + 1);
 }

@@ -6,11 +6,20 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 14:32:13 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/30 14:46:58 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 12:28:03 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static void copy(char *dst, char *src, int i, int l)
+{
+	while (i < l + 1)
+	{
+		dst[i] = src[i - 1];
+		++i;
+	}
+}
 
 char	*ft_straddc(char c, char *src, char target)
 {
@@ -35,11 +44,7 @@ char	*ft_straddc(char c, char *src, char target)
 		out[i] = c;
 		++i;
 	}
-	while (i < l + 1)
-	{
-		out[i] = src[i - 1];
-		++i;
-	}
+	copy(out, src, i, l);
 	ft_memdel((void **)&src);
 	return (out);
 }

@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 15:46:03 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/06 10:11:17 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 11:19:13 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ static size_t		ft_ocount(long long n, int base)
 {
 	size_t c;
 
-	c = 0;
-	if (n == 0)
-		++c;
+	c = (n == 0 ? 1 : 0);
 	while (n > 0)
 	{
 		++c;

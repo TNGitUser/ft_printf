@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_iuox.c                                         :+:      :+:    :+:   */
+/*   get_iuo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/30 12:00:06 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/06 10:03:04 by lucmarti         ###   ########.fr       */
+/*   Created: 2019/05/06 10:51:03 by lucmarti          #+#    #+#             */
+/*   Updated: 2019/05/06 12:46:41 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	ft_get_arg(long long *nu, va_list ap, t_stat *la)
 {
 	*nu = 0;
-	if (ft_strcmp(la->mod, "l") == 0)
+	if (ft_strcmp(la->mod, "l") == 0 || la->fmt == 'D')
 		*nu = va_arg(ap, long);
 	else if (ft_strcmp(la->mod, "ll") == 0)
 		*nu = va_arg(ap, long long);
@@ -79,58 +79,25 @@ char		*ft_coct(t_stat *la, va_list ap)
 		out = ft_strjoinf("0", out);
 	return (out);
 }
-/*
-void		ft_cund(t_stat *la, va_list ap)
+
+char		*ft_cund(t_stat *la, va_list ap)
 {
 	char			*out;
 	unsigned long	nu;
 
 	out = NULL;
-	if (la->ef->lmod == 60)
-		nu = va_arg(ap, int);
-	else if (la->ef->lmod == 30)
-		nu = va_arg(ap, int);
-	else if (la->ef->lmod == 10)
+	if (ft_strcmp(la->mod, "l") == 0 || la->fmt == 'U')
 		nu = va_arg(ap, unsigned long);
-	else if (la->ef->lmod == 20)
+	else if (ft_strcmp(la->mod, "hh") == 0)
+		nu = (unsigned char)va_arg(ap, unsigned int);
+	else if (ft_strcmp(la->mod, "h") == 0)
+		nu = (unsigned short)va_arg(ap, unsigned int);
+	else if (ft_strcmp(la->mod, "ll") == 0)
 		nu = va_arg(ap, unsigned long long);
 	else
-		nu = va_arg(ap, long long);
-	if (!(out= ft_ltoa(nu)))
+		nu = va_arg(ap, unsigned int);
+	if (!(out = ft_ltoa(nu)))
 		out = ft_strdup("(null)");
-	la->data = (void *)out;
+	ft_addz(&out, la, ft_strlen(out), nu);
+	return (out);
 }
-
-   static void	ft_upcase(char *str)
-   {
-   int i;
-
-   i = 0;
-   while (str[i] != '\0')
-   {
-   if (str[i] >= 'a' && str[i] <= 'f')
-   str[i] -= 32;
-   ++i;
-   }
-   }
-
-   void		ft_cunh(t_stat *la, va_list ap, int type)
-   {
-   char				*out;
-   long long	nu;
-
-   out = NULL;
-   if (la->ef->lmod == 60 || la->ef->lmod == 30)
-   nu = va_arg(ap, int);
-   else if (la->ef->lmod == 10)
-   nu = va_arg(ap, unsigned long);
-   else if (la->ef->lmod == 20)
-   nu = va_arg(ap, unsigned long long);
-   else
-   nu = va_arg(ap, long long);
-   if (!(out = ft_chex(NULL, nu, 1)))
-   out = ft_strdup("(null)");
-   if (type == 1)
-   ft_upcase(out);
-   la->data = (void *)out;
-   }*/
