@@ -6,7 +6,7 @@
 #    By: lucmarti <lucmarti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 15:37:09 by lucmarti          #+#    #+#              #
-#    Updated: 2019/04/30 14:31:25 by lucmarti         ###   ########.fr        #
+#    Updated: 2019/05/06 14:43:01 by lucmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC +=	./ft_isprint.c
 SRC +=	./ft_isupper.c
 SRC +=	./ft_itoa.c
 SRC +=	./ft_ltoa.c
+SRC +=	./ft_ultoa.c
 SRC +=	./ft_ftoa.c
 SRC +=	./ft_lstadd.c
 SRC +=	./ft_lstadd_back.c

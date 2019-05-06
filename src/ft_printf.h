@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 10:02:25 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/06 12:55:25 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 15:37:51 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ char			*ft_cstr(va_list ap);
 /*
 **	hex.c
 */
-char			*ft_chex(void *ptr, long long n, int t);
-char			*ft_coct_aux(long long n);
+char			*ft_chex(void *ptr, uintmax_t n, int t);
+char			*ft_coct_aux(uintmax_t n);
 
 /*
 **	init.c
@@ -102,8 +102,10 @@ void			trail_free(t_trail *core);
 /*
 **	bool.c
 */
+int				is_integer(char c);
 int				is_type(char c);
 int				is_mod(char c);
+int				is_unknown(char c);
 
 /*
 **	peacemaker.c

@@ -6,13 +6,13 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 10:51:03 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/06 12:46:41 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 14:44:05 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_get_arg(long long *nu, va_list ap, t_stat *la)
+static int	ft_get_arg(intmax_t *nu, va_list ap, t_stat *la)
 {
 	*nu = 0;
 	if (ft_strcmp(la->mod, "l") == 0 || la->fmt == 'D')
@@ -23,6 +23,10 @@ static int	ft_get_arg(long long *nu, va_list ap, t_stat *la)
 		*nu = (short int)(va_arg(ap, int));
 	else if (ft_strcmp(la->mod, "hh") == 0)
 		*nu = (signed char)(va_arg(ap, int));
+	else if (ft_strcmp(la->mod, "j") == 0)
+		*nu = (va_arg(ap, intmax_t));
+	else if (ft_strcmp(la->mod, "z") == 0)
+		*nu = va_arg(ap, ssize_t);
 	else
 		*nu = va_arg(ap, int);
 	return (0);
@@ -43,7 +47,7 @@ void		ft_addz(char **out, t_stat *la, int len, long long nu)
 char		*ft_cint(t_stat *la, va_list ap)
 {
 	char		*out;
-	long long	nu;
+	intmax_t	nu;
 	int			len;
 
 	out = NULL;
@@ -68,10 +72,23 @@ char		*ft_cint(t_stat *la, va_list ap)
 char		*ft_coct(t_stat *la, va_list ap)
 {
 	char		*out;
-	long long	nu;
+	uintmax_t	nu;
 
 	out = NULL;
-	nu = va_arg(ap, long long);
+	if (ft_strcmp(la->mod, "l") == 0 || la->fmt == 'O')
+		nu = va_arg(ap, unsigned long);
+	else if (ft_strcmp(la->mod, "hh") == 0)
+		nu = (unsigned char)va_arg(ap, unsigned int);
+	else if (ft_strcmp(la->mod, "h") == 0)
+		nu = (unsigned short)va_arg(ap, unsigned int);
+	else if (ft_strcmp(la->mod, "ll") == 0)
+		nu = va_arg(ap, unsigned long long);
+	else if (ft_strcmp(la->mod, "j") == 0)
+		nu = va_arg(ap, uintmax_t);
+	else if (ft_strcmp(la->mod, "z") == 0)
+		nu = va_arg(ap, size_t);
+	else
+		nu = va_arg(ap, unsigned int);
 	if (!(out = ft_coct_aux(nu)))
 		out = ft_strdup("(null)");
 	ft_addz(&out, la, ft_strlen(out), nu);
@@ -82,8 +99,8 @@ char		*ft_coct(t_stat *la, va_list ap)
 
 char		*ft_cund(t_stat *la, va_list ap)
 {
-	char			*out;
-	unsigned long	nu;
+	char				*out;
+	uintmax_t			nu;
 
 	out = NULL;
 	if (ft_strcmp(la->mod, "l") == 0 || la->fmt == 'U')
@@ -94,9 +111,13 @@ char		*ft_cund(t_stat *la, va_list ap)
 		nu = (unsigned short)va_arg(ap, unsigned int);
 	else if (ft_strcmp(la->mod, "ll") == 0)
 		nu = va_arg(ap, unsigned long long);
+	else if (ft_strcmp(la->mod, "j") == 0)
+		nu = va_arg(ap, uintmax_t);
+	else if (ft_strcmp(la->mod, "z") == 0)
+		nu = va_arg(ap, size_t);
 	else
 		nu = va_arg(ap, unsigned int);
-	if (!(out = ft_ltoa(nu)))
+	if (!(out = ft_ultoa(nu)))
 		out = ft_strdup("(null)");
 	ft_addz(&out, la, ft_strlen(out), nu);
 	return (out);

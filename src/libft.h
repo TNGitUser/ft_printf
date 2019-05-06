@@ -6,7 +6,7 @@
 /*   By: lucmarti <lucmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 10:53:21 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/30 14:46:31 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 14:44:20 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
 char				*ft_ltoa(long long n);
+char				*ft_ultoa(uintmax_t n);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putstrn(char const *s, size_t n);

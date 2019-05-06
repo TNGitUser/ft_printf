@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 10:19:06 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/06 12:54:22 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 15:25:28 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	arg_mod(char *text, int *cur, t_stat *arg)
 	int i;
 
 	i = *cur;
-	while (text[i] != '\0' && !is_type(text[i]))
+	while (text[i] != '\0' && is_mod(text[i]))
 		++i;
 	*cur += (i - 1 - *cur);
 	--i;
 	while (i >= 0)
 	{
-		if (is_mod(text[i]) || arg->mod)
+		if (!is_mod(text[i]) || arg->mod)
 			break ;
 		if (text[i] == 'l' && text[i - 1] == 'l')
 			arg->mod = "ll";
@@ -63,9 +63,11 @@ void	arg_mod(char *text, int *cur, t_stat *arg)
 		else if (text[i] == 'h' && text[i - 1] != 'h')
 			arg->mod = "h";
 		else if (text[i] == 'L' || text[i] == 'j')
-			arg->mod = text[i] == 'L' ? "L" : "j";
+			arg->mod = (text[i] == 'L' ? "L" : "j");
 		else if (text[i] == 'z')
 			arg->mod = "z";
+		if (text[i - 1] == 'z' || text[i - 1] == 'j')
+			arg->mod = text[i - 1] == 'j' ? "j" : "z";
 		--i;
 	}
 	return ;
@@ -88,7 +90,8 @@ void	arg_set(t_stat *arg, char *text, int len)
 			arg->form = (text[i] == ' ' && arg->form != 2) ? 1 : 2;
 		else if ((text[i] >= '1' && text[i] <= '9') || text[i] == '.')
 			arg_profs(text, &i, arg, (text[i] == '.' ? 1 : 0));
-		else if (text[i] == 'l' || text[i] == 'h' || text[i] == 'L')
+		else if (text[i] == 'L' || text[i] == 'l' || text[i] == 'h'
+				|| text[i] == 'j' || text[i] == 'z')
 			arg_mod(text, &i, arg);
 		else if (is_type(text[i]))
 			arg->fmt = text[i];
@@ -110,9 +113,13 @@ int		parse_arg(char *text, t_trail *core)
 	i = 1;
 	arg_init(&arg);
 	while (text[i] != '\0' && !is_type(text[i]))
+	{
+		if (is_unknown(text[i]))
+			return (i);
 		++i;
+	}
 	if (text[i] == '\0')
-		err_die("\nft_printf: Bad conversion");
+		return (i);
 	arg_set(&arg, text, text[i] == '\0' ? i : i + 1);
 	set_priorities(&arg);
 	print_start(&arg, core);

@@ -6,12 +6,13 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 09:48:25 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/06 12:23:44 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 15:45:37 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 int	main(void)
 {
@@ -121,10 +122,20 @@ int	main(void)
 	ft_printf("- : [%0+5d]\n", -42);
 	printf("* : [%0+5.3d]\n", 42);
 	ft_printf("- : [%0+5.3d]\n", 42);
-	printf("* : [%lu]\n", -42);
-	ft_printf("- : [%lu]\n", -42);
+	printf("* : [%lu]\n", -876);
+	ft_printf("- : [%lu]\n", -876);
+	printf("* : [%jd]\n", -92);
+	ft_printf("- : [%jd]\n", -92);
+	printf("* : [%jd]\n", 9223372036854775807);
+	ft_printf("- : [%jd]\n", 9223372036854775807);
+	printf("* : [%zhd]\n", 4294967296);
+	ft_printf("- : [%zhd]\n", 4294967296);
+	printf("@main_ftprintf: {%####0000 33..1..#00d}\n", 256);
+	ft_printf("@main_ftprintf: {%####0000 33..1..#00d}\n", 256);
+	printf("@main_ftprintf: {%###-#0000 33...12..#0+0d}\n", 256);
+	ft_printf("@main_ftprintf: {%###-#0000 33...12..#0+0d}\n", 256);
 	// ------------------------------------------------------------------------
-	// ------------------------------------------ integer test ----------------	
+	// ------------------------------------------ unsigned test ---------------	
 	printf("\n######## UNSIGNED ########\n");
 	printf("* : [%u]\n", 0);
 	ft_printf("- : [%u]\n", 0);
@@ -138,6 +149,10 @@ int	main(void)
 	ft_printf("- : [%lu]\n", -42);
 	printf("* : [%llu]\n", -4200);
 	ft_printf("- : [%llu]\n", -4200);
+	printf("* : [%lu]\n", ULONG_MAX);
+	ft_printf("- : [%lu]\n", ULONG_MAX);
+	printf("* : [%U]\n", ULONG_MAX);
+	ft_printf("- : [%U]\n", ULONG_MAX);
 	// ------------------------------------------------------------------------
 	// ------------------------------------------ pointer test ----------------
 	printf("\n######## POINTER ########\n");
@@ -164,8 +179,18 @@ int	main(void)
 	ft_printf("- : [%-5%]\n");
 	printf("* : [% %]\n");
 	ft_printf("- : [% %]\n");
-	printf("* : [%+%]\n");
-	ft_printf("- : [%+%]\n");
+	printf("* : [%+.5%]\n");
+	ft_printf("- : [%+.5%]\n");
+	printf("* : [%+.%]\n");
+	ft_printf("- : [%+.%]\n");
+	printf("* : [% Zy fait chaud ici]\n");
+	ft_printf("- : [% Zy fait chaud ici]\n");
+	printf("* : [% zy fait chaud ici %%]\n");
+	ft_printf("- : [% zy fait chaud ici %%]\n");
+	printf("* : [%      Zooooooo]\n");
+	ft_printf("* : [%      Zooooooo]\n");
+	printf("* : [%%%]\n");
+	ft_printf("* : [%%%]\n");
 	// ------------------------------------------------------------------------
 	// ------------------------------------------ octal test ------------------
 	printf("\n######## OCTAL ########\n");
@@ -181,6 +206,10 @@ int	main(void)
 	ft_printf("- : [%#6o]\n", 2500);
 	printf("- : [%-#6o]\n", 2500);
 	ft_printf("- : [%-#6o]\n", 2500);
+	printf("- : [%lo]\n", ULONG_MAX);
+	ft_printf("- : [%lo]\n", ULONG_MAX);
+	printf("- : [%llo]\n", ULLONG_MAX);
+	ft_printf("- : [%llo]\n", ULLONG_MAX);
 	// ------------------------------------------------------------------------
 	// ------------------------------------------ hexa test -------------------
 	printf("\n######## HEXADECIMAL ########\n");
@@ -204,6 +233,12 @@ int	main(void)
 	ft_printf("- : [%#8x]\n", 42);
 	printf("* : [%#-8x]\n", 42);
 	ft_printf("- : [%#-8x]\n", 42);
-	// ------------------------------------------------------------------------
+	printf("* : [%ll#x]\n", 9223372036854775807);
+	ft_printf("- : [%ll#x]\n", 9223372036854775807);
+	printf("* : [%zx]\n", ULONG_MAX);
+	ft_printf("- : [%zx]\n", ULONG_MAX);
+	// ------------------------------------------------------------------------		
+	printf("%.p , %.10p\n", 0, 0);
+	ft_printf("%.p, %.10p\n", 0, 0);
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 15:46:03 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/06 11:19:13 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 15:37:57 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static size_t		ft_ocount(long long n, int base)
+static size_t		ft_ocount(uintmax_t n, int base)
 {
 	size_t c;
 
@@ -25,7 +25,7 @@ static size_t		ft_ocount(long long n, int base)
 	return (c);
 }
 
-static size_t		ft_hcount(long unsigned n, int base)
+static size_t		ft_hcount(uintmax_t n, int base)
 {
 	size_t c;
 
@@ -38,12 +38,12 @@ static size_t		ft_hcount(long unsigned n, int base)
 	return (c);
 }
 
-char				*ft_chex(void *ptr, long long n, int t)
+char				*ft_chex(void *ptr, uintmax_t n, int t)
 {
 	char			*out;
 	size_t			len;
-	long unsigned	lptr;
-	long unsigned	res;
+	uintmax_t		lptr;
+	uintmax_t		res;
 
 	lptr = t == 0 ? (long unsigned)ptr : n;
 	len = ft_hcount(lptr, 16);
@@ -66,11 +66,11 @@ char				*ft_chex(void *ptr, long long n, int t)
 	return (out);
 }
 
-char				*ft_coct_aux(long long n)
+char				*ft_coct_aux(uintmax_t n)
 {
 	char			*out;
 	size_t			len;
-	long long		res;
+	uintmax_t		res;
 
 	len = ft_ocount(n, 8);
 	if (!(out = malloc(sizeof(char) * (len + 1))))

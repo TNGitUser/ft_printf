@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 10:52:41 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/06 11:51:53 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 15:41:04 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,31 @@ static void	ft_upcase(char *str)
 	}
 }
 
+static void	get_arg(uintmax_t *nu, va_list ap, t_stat *la)
+{
+	if (ft_strcmp(la->mod, "hh") == 0)
+		*nu = (unsigned char)va_arg(ap, int);
+	else if (ft_strcmp(la->mod, "h") == 0)
+		*nu = (unsigned short)va_arg(ap, int);
+	else if (ft_strcmp(la->mod, "l") == 0)
+		*nu = va_arg(ap, unsigned long);
+	else if (ft_strcmp(la->mod, "ll") == 0)
+		*nu = va_arg(ap, unsigned long long);
+	else if (ft_strcmp(la->mod, "j") == 0)
+		*nu = va_arg(ap, uintmax_t);
+	else if (ft_strcmp(la->mod, "z") == 0)
+		*nu = va_arg(ap, size_t);
+	else
+		*nu = va_arg(ap, unsigned int);
+}
+
 char		*ft_cunh(t_stat *la, va_list ap, int type)
 {
 	char		*out;
-	long long	nu;
+	uintmax_t	nu;
 
 	out = NULL;
-	if (ft_strcmp(la->mod, "hh") == 0)
-		nu = (unsigned char)va_arg(ap, int);
-	else if (ft_strcmp(la->mod, "h") == 0)
-		nu = (unsigned short)va_arg(ap, int);
-	else if (ft_strcmp(la->mod, "l") == 0)
-		nu = va_arg(ap, unsigned long);
-	else if (ft_strcmp(la->mod, "ll") == 0)
-		nu = va_arg(ap, unsigned long long);
-	else
-		nu = va_arg(ap, unsigned int);
+	get_arg(&nu, ap, la);
 	if (!(out = ft_chex(NULL, nu, 1)))
 		out = ft_strdup("(null)");
 	if (type == 1)
