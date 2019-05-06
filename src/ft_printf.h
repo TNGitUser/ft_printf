@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 10:02:25 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/02 12:41:07 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 10:23:51 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct	s_stat
 /*
 **	print.c
 */
+void			print_oct(t_stat *arg, t_trail *core, int len);
 void			print_int(t_stat *arg, t_trail *core, int len);
 void			print_per(t_stat *arg, t_trail *core, int len);
 
@@ -64,6 +65,7 @@ void			print_start(t_stat *arg, t_trail *core);
 **	get_iuo.c
 */
 char			*ft_cint(t_stat *arg, va_list ap);
+char			*ft_coct(t_stat *la, va_list ap);
 
 /*
 **	get_csp.c
@@ -76,6 +78,7 @@ char			*ft_cstr(va_list ap);
 **	hex.c
 */
 char			*ft_chex(void *ptr, long long n, int t);
+char			*ft_coct_aux(long long n);
 
 /*
 **	init.c

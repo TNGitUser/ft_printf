@@ -6,24 +6,26 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 15:46:03 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/04/29 15:48:27 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 10:11:17 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-/*
+
 static size_t		ft_ocount(long long n, int base)
 {
 	size_t c;
 
 	c = 0;
+	if (n == 0)
+		++c;
 	while (n > 0)
 	{
 		++c;
 		n = n / base;
 	}
 	return (c);
-}*/
+}
 
 static size_t		ft_hcount(long unsigned n, int base)
 {
@@ -65,7 +67,7 @@ char				*ft_chex(void *ptr, long long n, int t)
 	}
 	return (out);
 }
-/*
+
 char				*ft_coct_aux(long long n)
 {
 	char			*out;
@@ -78,6 +80,8 @@ char				*ft_coct_aux(long long n)
 	out[len] = '\0';
 	len--;
 	res = 0;
+	if (n == 0)
+		out[0] = '0';
 	while (n > 0)
 	{
 		res = n % 8;
@@ -87,4 +91,4 @@ char				*ft_coct_aux(long long n)
 		--len;
 	}
 	return (out);
-}*/
+}

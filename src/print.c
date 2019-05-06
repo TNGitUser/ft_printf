@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 10:43:19 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/02 13:49:33 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/06 10:22:31 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,12 @@ void	print_ptr(t_stat *arg, t_trail *core, int len)
 void	print_str(t_stat *arg, t_trail *core, int len, int i)
 {
 	char	*out;
+	int		null;
 
+	null = 0;
 	out = ft_cstr(core->ap);
+	if (out == NULL && (null = !null) == 1)
+		out = ft_strdup("(null)");
 	arg->str = out;
 	len = ft_strlen(out);
 	i = 0;
@@ -69,6 +73,9 @@ void	print_str(t_stat *arg, t_trail *core, int len, int i)
 		ft_putstrn(out, (arg->pr != -1 ? arg->pr : len));
 		core->printed += (arg->pr != -1 ? arg->pr : len);
 	}
+	if (null == 1)
+		ft_memdel((void **)&out);
+	arg->str = NULL;
 }
 
 void	print_char(t_stat *arg, t_trail *core)
@@ -110,6 +117,8 @@ void	print_start(t_stat *arg, t_trail *core)
 		print_ptr(arg, core, 0);
 	else if (arg->fmt == 'i' || arg->fmt == 'd')
 		print_int(arg, core, 0);
+	else if (arg->fmt == 'o')
+		print_oct(arg, core, 0);
 	else if (arg->fmt == '%')
 		print_per(arg, core, 0);
 }
