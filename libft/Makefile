@@ -6,7 +6,7 @@
 #    By: lucmarti <lucmarti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 15:37:09 by lucmarti          #+#    #+#              #
-#    Updated: 2019/05/06 14:43:01 by lucmarti         ###   ########.fr        #
+#    Updated: 2019/05/07 11:41:02 by lucmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,17 +128,17 @@ _WHITE=\x1b[37m
 OBJ_PATH = ./objs
 OBJ_FILE = $(SRC:.c=.o)
 
+DEP_FILE = $(SRC:.c=.d)
+
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_FILE))
+DEP = $(addprefix $(OBJ_PATH)/,$(DEP_FILE))
 
 ifndef VERBOSE
 .SILENT:
 VERBOSE = 0
 endif
 
-all: start $(NAME)
-
-start:
-	@echo "Compilation of $(_CYAN)libft$(_END)   :    $(_YELLOW)Started${_END}"
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar -rc $(NAME) $(OBJ) libft.h
@@ -157,6 +157,7 @@ endif
 
 clean:
 	@rm -f $(OBJ)
+	@rm -f $(DEP)
 	@rmdir $(OBJ_PATH) 2> /dev/null || (true && if [ -d "$(OBJ_PATH)" ]; then\
 		echo "$(Red)ERROR$(End)	: $(OBJ_PATH) is not empty."; fi)
 
@@ -164,3 +165,5 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+-include $(DEP)

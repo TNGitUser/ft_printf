@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 15:28:18 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/07 09:46:35 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/07 11:28:24 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,6 @@ void			set_priorities(t_stat *arg)
 		arg->alt = 0;
 	if (arg->fmt == '%')
 		arg->pr = -1;
+	else if (arg->fmt == 'f' && arg->pr == -1)
+		arg->pr = 6;
 }

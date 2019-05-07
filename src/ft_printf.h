@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 10:02:25 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/07 10:02:40 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/07 11:25:18 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct	s_stat
 **	print_hf.c
 */
 void			print_x(t_stat *arg, t_trail *core, int len, int type);
+void			print_flt(t_stat *arg, t_trail *core, int len);
 
 /*
 **	print_int.c
@@ -68,9 +69,14 @@ void			print_char(t_stat *arg, t_trail *core);
 void			print_start(t_stat *arg, t_trail *core);
 
 /*
-**	get_xXf.c
+**	get_x.c
 */
 char			*ft_cunh(t_stat *la, va_list ap, int type);
+
+/*
+**	get_f.c
+*/
+char			*ft_cflt(t_stat *la, va_list ap);
 
 /*
 **	get_iuo.c

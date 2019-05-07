@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_ftoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 13:24:07 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/07 10:22:24 by lucmarti         ###   ########.fr       */
+/*   Created: 2019/05/07 11:32:33 by lucmarti          #+#    #+#             */
+/*   Updated: 2019/05/07 12:51:13 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,46 +77,56 @@ static void	ft_fparta(char *str, long double n, int *len, int precision)
 {
 	long double	fpart;
 	long long	ftorpart;
-	int			pr;
 	int			last;
 
-	pr = precision;
 	fpart = (n - (long long)n);
 	fpart *= ft_power(10, (precision >= 10 ? 10 : precision));
 	if (precision > 10)
 		ft_fparta(str, fpart, len, precision - 10);
-	if (precision < 10)
+	if (precision <= 10)
 	{
-		printf("{%.20Lf}\n", fpart);
+	//	printf("{%.20Lf}\n", fpart);
 		fpart *= 10;
-		printf("{%.20Lf}\n", fpart);
+	//	printf("{%.20Lf}\n", fpart);
 		ftorpart = (long long)fpart;
-		printf("{%lld}\n", ftorpart);
+		ftorpart *= ftorpart < 0. ? -1 : 1;
+	//	printf("{%lld}\n", ftorpart);
 		last = ftorpart % 10;
 		ftorpart /= 10;
 		if (last >= 5)
 			ftorpart += 1;
+	//	printf("{%lld}\n", ftorpart);
 	}
 	else
 		ftorpart = (long long)fpart;
 	ft_aux(str, precision, ftorpart, len);
 }
 
+/*
+**	If pr (precision) is superior to 0 we add 1 to the length (the precision
+**	dot) then we later add pr to len + 1 to have the full string length.
+**	Pr representing the number of digit after de precision dot.
+*/
+
 char		*ft_ftoa(long double n, int pr)
 {
 	char	*str;
 	int		len;
-	long	rpart;
 
-	rpart = (long long)n;
-	len = ft_getlength(rpart);
-	len += (n < 0 ? 1 : 0);
-	if (!(str = (char *)ft_memalloc(sizeof(char) * (len + 2 + pr))))
+	len = ft_getlength((long long)n);
+	len += (n < 0. ? 1 : 0);
+	len += (pr > 0 ? 1 : 0);
+	if (!(str = (char *)ft_memalloc(sizeof(char) * (len + pr + 1))))
 		return (NULL);
-	len = len + 1 + pr;
+	len = len + pr;
 	str[len--] = '\0';
-	ft_fparta(str, n, &len, pr);
-	str[len--] = '.';
-	ft_rparta(str, rpart, &len);
+	if (pr > 0)
+	{
+		ft_fparta(str, n, &len, pr);
+		str[len--] = '.';
+	//	printf("@%s@\n", str + len + 1);
+	}
+	ft_rparta(str, (long long)n, &len);
+	//printf("{%s}\n", str);
 	return (str);
 }

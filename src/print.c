@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 10:43:19 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/07 10:10:06 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/07 11:20:02 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,6 @@ void	print_start(t_stat *arg, t_trail *core)
 		print_oct(arg, core, 0);
 	else if (arg->fmt == '%')
 		print_per(arg, core, 0);
+	else if (arg->fmt == 'f')
+		print_flt(arg, core, 0);
 }
