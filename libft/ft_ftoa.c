@@ -6,19 +6,14 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 13:24:07 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/02/22 16:31:58 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/07 10:22:24 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-static long long	ft_rpart(long double n)
-{
-	return ((long long)n);
-}
-
-static int			ft_getlength(long long c)
+static int	ft_getlength(long long c)
 {
 	int i;
 
@@ -57,33 +52,11 @@ static void	ft_rparta(char *str, long rpart, int *len)
 	}
 }
 
-static void	ft_fparta(char *str, long double n, int *len, int precision)
+static void	ft_aux(char *str, int precision, long long ftorpart, int *len)
 {
-	long double	fpart;
-	long long	ftorpart;
-	int			pr;
-	int			last;
+	int test;
 
-	pr = precision;
-	fpart = (n - ft_rpart(n));
-	fpart *= ft_power(10, (precision >= 10 ? 10 : precision));
-	if (precision > 10)
-		ft_fparta(str, fpart, len, precision - 10);
-	if (precision < 10)
-	{
-		printf("{%.20Lf}\n", fpart);
-		fpart *= 10;
-		printf("{%.20Lf}\n", fpart);
-		ftorpart = ft_rpart(fpart);
-		printf("{%lld}\n", ftorpart);
-		last = ftorpart % 10;
-		ftorpart /= 10;
-		if (last >= 5)
-			ftorpart += 1;
-	}
-	else
-		ftorpart = ft_rpart(fpart);
-	int test = ft_getlength(ftorpart);
+	test = ft_getlength(ftorpart);
 	if (ftorpart == 0)
 		test--;
 	if (ftorpart < 0)
@@ -100,13 +73,42 @@ static void	ft_fparta(char *str, long double n, int *len, int precision)
 	}
 }
 
+static void	ft_fparta(char *str, long double n, int *len, int precision)
+{
+	long double	fpart;
+	long long	ftorpart;
+	int			pr;
+	int			last;
+
+	pr = precision;
+	fpart = (n - (long long)n);
+	fpart *= ft_power(10, (precision >= 10 ? 10 : precision));
+	if (precision > 10)
+		ft_fparta(str, fpart, len, precision - 10);
+	if (precision < 10)
+	{
+		printf("{%.20Lf}\n", fpart);
+		fpart *= 10;
+		printf("{%.20Lf}\n", fpart);
+		ftorpart = (long long)fpart;
+		printf("{%lld}\n", ftorpart);
+		last = ftorpart % 10;
+		ftorpart /= 10;
+		if (last >= 5)
+			ftorpart += 1;
+	}
+	else
+		ftorpart = (long long)fpart;
+	ft_aux(str, precision, ftorpart, len);
+}
+
 char		*ft_ftoa(long double n, int pr)
 {
 	char	*str;
 	int		len;
 	long	rpart;
 
-	rpart = ft_rpart(n);
+	rpart = (long long)n;
 	len = ft_getlength(rpart);
 	len += (n < 0 ? 1 : 0);
 	if (!(str = (char *)ft_memalloc(sizeof(char) * (len + 2 + pr))))

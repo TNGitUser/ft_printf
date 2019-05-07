@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 10:19:06 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/06 15:25:28 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/07 10:12:30 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,10 @@ void	arg_mod(char *text, int *cur, t_stat *arg)
 	{
 		if (!is_mod(text[i]) || arg->mod)
 			break ;
-		if (text[i] == 'l' && text[i - 1] == 'l')
-			arg->mod = "ll";
-		else if (text[i] == 'l' && text[i - 1] != 'l')
-			arg->mod = "l";
-		else if (text[i] == 'h' && text[i - 1] == 'h')
-			arg->mod = "hh";
-		else if (text[i] == 'h' && text[i - 1] != 'h')
-			arg->mod = "h";
+		if (text[i] == 'l' && (text[i - 1] == 'l' || text[i - 1] != 'l'))
+			arg->mod = text[i - 1] == 'l' ? "ll" : "l";
+		else if (text[i] == 'h' && (text[i - 1] == 'h' || text[i - 1] != 'h'))
+			arg->mod = text[i - 1] == 'h' ? "hh" : "h";
 		else if (text[i] == 'L' || text[i] == 'j')
 			arg->mod = (text[i] == 'L' ? "L" : "j");
 		else if (text[i] == 'z')

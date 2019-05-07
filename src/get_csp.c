@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 11:13:05 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/06 10:23:11 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/07 10:02:49 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ char	*ft_cptr(t_stat *arg, va_list ap)
 	return (out);
 }
 
-char	*ft_cstr(va_list ap)
+char	*ft_cstr(t_stat *arg, va_list ap)
 {
+	(void)arg;
 	return (va_arg(ap, char *));
 }

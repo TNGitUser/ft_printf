@@ -6,7 +6,7 @@
 #    By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/28 15:42:43 by lucmarti          #+#    #+#              #
-#    Updated: 2019/05/06 11:28:34 by lucmarti         ###   ########.fr        #
+#    Updated: 2019/05/07 10:14:47 by lucmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,12 @@ Cyan=\x1b[36m
 Yellow=\x1b[34m
 End=\x1b[0m
 
-NAME = libftprintf.a
+NAME = ft_printf
 
 SRC_PATH = ./src
-SRC_FILE = ft_printf.c error.c init.c parser.c bool.c peacemaker.c\
-		   hex.c print.c get_csp.c get_iuo.c get_xf.c print_int.c print_hf.c
+SRC_FILE = main.c ft_printf.c error.c init.c parser.c bool.c peacemaker.c\
+		   hex.c print.c get_csp.c get_iuo.c get_xf.c print_int.c print_hf.c\
+		   print_ptr.c
 
 OBJ_PATH = ./objs
 OBJ_FILE = $(SRC_FILE:.c=.o)
@@ -45,16 +46,8 @@ $(NAME): $(OBJ)
 	@$(MAKE) -C ./libft "VERBOSE=$(VERBOSE)"
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@cp -a libft/libft.a $(OBJ_PATH)/libft.a
-	@ar -rc $(NAME) $(OBJ) libft/objs/*.o libft/libft.h src/ft_printf.h
-	@ranlib $(NAME)
-	@echo "Compilation of $(Cyan)$(NAME)$(End)   :    ${Green}Done${End}"
-
-ft_printf: $(OBJ)
-	@$(MAKE) -C ./libft "VERBOSE=$(VERBOSE)"
-	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	@cp -a libft/libft.a $(OBJ_PATH)/libft.a
 	@gcc $(CFLAGS) -o $(NAME) $(OBJ) $(LIB)
-	@echo "Compilation of $(Cyan)ft_printf$(End)   :    ${Green}Done${End}"
+	@echo "Compilation of $(Cyan)$(NAME)$(End)   :    ${Green}Done${End}"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true

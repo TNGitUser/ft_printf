@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 10:02:25 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/06 15:37:51 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/07 10:02:40 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char			*ft_cund(t_stat *la, va_list ap);
 */
 char			*ft_cchr(va_list ap);
 char			*ft_cptr(t_stat *arg, va_list ap);
-char			*ft_cstr(va_list ap);
+char			*ft_cstr(t_stat *arg, va_list ap);
 
 /*
 **	hex.c
