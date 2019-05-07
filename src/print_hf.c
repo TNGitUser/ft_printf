@@ -6,12 +6,11 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 10:54:02 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/07 12:16:23 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/07 16:48:55 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 static void	print_ftrail(t_stat *arg, t_trail *core, int *i, int len)
 {
@@ -31,7 +30,7 @@ static void	print_ftrail(t_stat *arg, t_trail *core, int *i, int len)
 	}
 }
 
-void	print_x(t_stat *arg, t_trail *core, int len, int type)
+void		print_x(t_stat *arg, t_trail *core, int len, int type)
 {
 	char	*out;
 	int		i;
@@ -52,7 +51,7 @@ void	print_x(t_stat *arg, t_trail *core, int len, int type)
 	arg->str = NULL;
 }
 
-void	print_flt(t_stat *arg, t_trail *core, int len)
+void		print_flt(t_stat *arg, t_trail *core, int len)
 {
 	char	*out;
 	int		i;
@@ -61,7 +60,7 @@ void	print_flt(t_stat *arg, t_trail *core, int len)
 	out = ft_cflt(arg, core->ap);
 	len = ft_strlen(out);
 	arg->str = out;
-	print_trail(arg, core, &i, len);
+	print_ftrail(arg, core, &i, len);
 	if (!arg->adj || arg->fs <= len)
 	{
 		ft_putstr(out);

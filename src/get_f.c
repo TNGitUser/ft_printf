@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 10:31:21 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/07 12:12:02 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/07 16:48:39 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char		*ft_cflt(t_stat *la, va_list ap)
 	long double			nu;
 
 	out = NULL;
+	nu = -0.;
 	get_arg(&nu, ap, la);
 	if (!(out = ft_ftoa(nu, la->pr)))
 		out = ft_strdup("(null)");

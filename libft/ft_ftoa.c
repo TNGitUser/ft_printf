@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 11:32:33 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/07 12:51:13 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/07 16:48:28 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,13 @@ static void	ft_fparta(char *str, long double n, int *len, int precision)
 		ft_fparta(str, fpart, len, precision - 10);
 	if (precision <= 10)
 	{
-	//	printf("{%.20Lf}\n", fpart);
 		fpart *= 10;
-	//	printf("{%.20Lf}\n", fpart);
 		ftorpart = (long long)fpart;
 		ftorpart *= ftorpart < 0. ? -1 : 1;
-	//	printf("{%lld}\n", ftorpart);
 		last = ftorpart % 10;
 		ftorpart /= 10;
 		if (last >= 5)
 			ftorpart += 1;
-	//	printf("{%lld}\n", ftorpart);
 	}
 	else
 		ftorpart = (long long)fpart;
@@ -124,9 +120,9 @@ char		*ft_ftoa(long double n, int pr)
 	{
 		ft_fparta(str, n, &len, pr);
 		str[len--] = '.';
-	//	printf("@%s@\n", str + len + 1);
 	}
 	ft_rparta(str, (long long)n, &len);
-	//printf("{%s}\n", str);
+	if ((long long)n == 0 && n < 0)
+		str[0] = '-';
 	return (str);
 }
