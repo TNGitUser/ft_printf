@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 10:01:41 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/07 17:07:26 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/09 12:41:04 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ int		ft_printf(char *text, ...)
 
 	core.ftext = text;
 	core.printed = 0;
-	//core = trail_init(text);
 	va_start(core.ap, text);
 	print_ud(&core, text, 0);
 	ret = core.printed;
-	//trail_free(core);
 	return (ret);
 }

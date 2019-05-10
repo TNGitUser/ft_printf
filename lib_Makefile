@@ -6,7 +6,7 @@
 #    By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/28 15:42:43 by lucmarti          #+#    #+#              #
-#    Updated: 2019/05/07 11:46:23 by lucmarti         ###   ########.fr        #
+#    Updated: 2019/05/09 12:41:23 by lucmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,12 @@ Cyan=\x1b[36m
 Yellow=\x1b[34m
 End=\x1b[0m
 
-NAME = ft_printf
+NAME = libftprintf.a
 
 SRC_PATH = ./src
-SRC_FILE = main.c ft_printf.c error.c init.c parser.c bool.c peacemaker.c\
-		   hex.c print.c get_csp.c get_iuo.c get_x.c get_f.c print_int.c\
-		   print_hf.c print_ptr.c
+SRC_FILE = ft_printf.c error.c parser.c bool.c peacemaker.c\
+		   hex.c print.c get_csp.c get_iuo.c get_x.c print_int.c print_hf.c\
+		   print_ptr.c get_f.c
 
 OBJ_PATH = ./objs
 OBJ_FILE = $(SRC_FILE:.c=.o)
@@ -42,19 +42,29 @@ endif
 
 all: $(NAME)
 
-libft: FORCE
+$(NAME): $(OBJ)
 	@$(MAKE) -C ./libft "VERBOSE=$(VERBOSE)"
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
+	@cp -a libft/libft.a $(OBJ_PATH)/libft.a
+	@ar -rc $(NAME) $(OBJ) libft/objs/*.o libft/libft.h src/ft_printf.h
+	@ranlib $(NAME)
+	@echo "Compilation of $(Cyan)$(NAME)$(End)   :    ${Green}Done${End}"
 
-$(NAME): libft $(OBJ)
+ft_printf: $(OBJ)
+	@$(MAKE) -C ./libft "VERBOSE=$(VERBOSE)"
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@cp -a libft/libft.a $(OBJ_PATH)/libft.a
 	@gcc $(CFLAGS) -o $(NAME) $(OBJ) $(LIB)
-	@echo "Compilation of $(Cyan)$(NAME)$(End)   :    ${Green}Done${End}"
+	@echo "Compilation of $(Cyan)ft_printf$(End)   :    ${Green}Done${End}"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@gcc $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 	@echo "[${Green}Compiled${End}] : $<"
+
+libft: 
+	@$(MAKE) -C ./libft "VERBOSE=$(VERBOSE)"
+	@cp -a libft/libft.a $(OBJ_PATH)/libft.a
 
 .PHONY: clean fclean miniclean minire re
 
@@ -79,4 +89,3 @@ minire: miniclean all
 
 re: fclean all
 -include $(DEPS)
-FORCE:
