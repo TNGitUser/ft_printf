@@ -6,13 +6,13 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 10:19:06 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/09 15:03:14 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/13 10:52:34 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	arg_init(t_stat *arg)
+static void	arg_init(t_stat *arg)
 {
 	arg->flags = 0;
 	arg->alt = 0;
@@ -24,23 +24,10 @@ void	arg_init(t_stat *arg)
 	arg->fmt = 0;
 	arg->mod = NULL;
 	arg->str = NULL;
+	init_aptr(arg);
 }
 
-void	arg_profs(char *text, int *cur, t_stat *arg, int type)
-{
-	if (type == 0)
-		arg->fs = ft_atoi(text + *cur);
-	else
-	{
-		arg->pr = ft_atoi(text + *cur + 1);
-		++(*cur);
-	}
-	while (text[*cur] != '\0' && (text[*cur] >= '0' && text[*cur] <= '9'))
-		++(*cur);
-	--(*cur);
-}
-
-void	arg_mod(char *text, int *cur, t_stat *arg)
+void		set_mod(t_stat *arg, char *text, int *cur)
 {
 	int i;
 
@@ -68,28 +55,41 @@ void	arg_mod(char *text, int *cur, t_stat *arg)
 	return ;
 }
 
-void	arg_set(t_stat *arg, char *text, int len)
+static int	arg_test(char text)
+{
+	size_t	i;
+	char	*codex;
+
+	codex = "#0- +*123456789.Llhjz";
+	if (is_type(text))
+		return (0);
+	i = 0;
+	while (codex[i] != '\0')
+	{
+		if (codex[i] == text)
+		{
+			if (i <= 2)
+				return (i == 0 ? 0 : 1);
+			if (i > 2 && i <= 4)
+				return (2);
+			if (i > 4 && i <= 15)
+				return (3);
+			if (i > 15 && i <= 20)
+				return (4);
+		}
+		++i;
+	}
+	return (-1);
+}
+
+static void	arg_set(t_stat *arg, char *text, int len)
 {
 	int	i;
 
 	i = 0;
 	while (i < len)
 	{
-		if (text[i] == '#')
-			arg->alt = 1;
-		else if (text[i] == '0')
-			arg->zero = 1;
-		else if (text[i] == '-')
-			arg->adj = 1;
-		else if (text[i] == ' ' || text[i] == '+')
-			arg->form = (text[i] == ' ' && arg->form != 2) ? 1 : 2;
-		else if ((text[i] >= '1' && text[i] <= '9') || text[i] == '.')
-			arg_profs(text, &i, arg, (text[i] == '.' ? 1 : 0));
-		else if (text[i] == 'L' || text[i] == 'l' || text[i] == 'h'
-				|| text[i] == 'j' || text[i] == 'z')
-			arg_mod(text, &i, arg);
-		else if (is_type(text[i]))
-			arg->fmt = text[i];
+		arg->parser[arg_test(text[i])](arg, text, &i);
 		++i;
 	}
 }
@@ -100,13 +100,14 @@ void	arg_set(t_stat *arg, char *text, int len)
 **		correct parameters (flags, field width, precision, type, modifier).
 */
 
-int		parse_arg(char *text, t_trail *core)
+int			parse_arg(char *text, t_trail *core)
 {
 	int		i;
 	t_stat	arg;
 
 	i = 1;
 	arg_init(&arg);
+	arg.ap = &(core->ap);
 	while (text[i] != '\0' && !is_type(text[i]))
 	{
 		if (is_unknown(text[i]))

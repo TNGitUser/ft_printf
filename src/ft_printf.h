@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 10:02:25 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/07 11:25:18 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/13 10:51:36 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ typedef struct	s_stat
 	char		fmt;
 	char		*mod;
 	char		*str;
-
+	void		(*parser[6]) (struct s_stat *arg, char *text, int *cur);
+	va_list		*ap;
 }				t_stat;
 
 /*
@@ -119,8 +120,14 @@ int				is_unknown(char c);
 void			set_priorities(t_stat *arg);
 
 /*
+**	init.c
+*/
+void			init_aptr(t_stat *arg);
+
+/*
 **	parser.c
 */
+void			set_mod(t_stat *arg, char *text, int *cur);
 int				parse_arg(char *text, t_trail *core);
 
 /*

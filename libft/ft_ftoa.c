@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 11:32:33 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/09 15:03:33 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/14 09:38:45 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,13 @@ static void	ft_fparta(char *str, long double n, int *len, int precision)
 **	Pr representing the number of digit after de precision dot.
 */
 
-char		*ft_ftoa(long double n, int pr)
+char		*ft_ftoa(long double n, int pr, int neg)
 {
 	char		*str;
 	int			len;
 
 	len = ft_getlength((long long)n);
-	len += (n < 0. ? 1 : 0);
+	len += (n < 0. || neg ? 1 : 0);
 	len += (pr > 0 ? 1 : 0);
 	if (!(str = (char *)ft_memalloc(sizeof(char) * (len + pr + 1))))
 		return (NULL);
@@ -121,7 +121,7 @@ char		*ft_ftoa(long double n, int pr)
 		str[len--] = '.';
 	}
 	ft_rparta(str, (long long)n, &len);
-	if ((long long)n == 0 && n < 0)
+	if ((long long)n == 0 && (n < 0 || neg))
 		str[0] = '-';
 	return (str);
 }

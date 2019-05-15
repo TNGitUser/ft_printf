@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 10:51:26 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/09 15:04:20 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/13 11:35:32 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	is_type(char c)
 	int		i;
 	char	*codex;
 
-	codex = "icpsfdouxXDOUS%";
+	codex = "icpsfdouxXDOUSF%";
 	i = 0;
 	while (codex[i] != '\0')
 		if (codex[i++] == c)
@@ -55,7 +55,7 @@ int	is_unknown(char c)
 	int		i;
 	char	*codex;
 
-	codex = " 0#+-.cspLhjlzouxXDUOfid%123456789";
+	codex = " 0#+-.cspLhjlzouxXDUOFfid%123456789*";
 	i = 0;
 	while (codex[i] != '\0')
 	{

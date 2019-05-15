@@ -6,7 +6,7 @@
 /*   By: lucmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 10:31:21 by lucmarti          #+#    #+#             */
-/*   Updated: 2019/05/09 14:05:35 by lucmarti         ###   ########.fr       */
+/*   Updated: 2019/05/14 09:37:50 by lucmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,17 @@ char		*ft_cflt(t_stat *la, va_list ap)
 {
 	char				*out;
 	long double			nu;
+	int					neg;
 
 	out = NULL;
-	nu = 0;
+	nu = -1;
+	neg = 0;
 	get_arg(&nu, ap, la);
-	if (!(out = ft_ftoa(nu, la->pr)))
+	if (1 / nu < 0)
+		neg = 1;
+	if (!(out = ft_ftoa(nu, la->pr, neg)))
 		out = ft_strdup("(null)");
-	if (nu >= 0. && la->form != 0)
+	if (nu >= 0. && la->form != 0 && !neg)
 		out = ft_strjoinf(la->form == 2 ? "+" : " ", out);
 	if (out[0] == '0' && la->pr == 0)
 		out[0] = 0;
